@@ -22,7 +22,7 @@ for(var x = 0; x <links.length;x++){
 
 //Creo las barritas de una barra particular identificada por su id
 function crearBarra(id_barra){
-    for(i=0;i<=16;i++){
+    for(i=0;i<=19;i++){
         let div = document.createElement("div");
         div.className = "e";
         id_barra.appendChild(div);
@@ -32,21 +32,35 @@ function crearBarra(id_barra){
 //selecciono todas las barras generales par aluego manipularlas
 let html = document.getElementById("html");
 crearBarra(html);
+
 let javascript = document.getElementById("javascript");
 crearBarra(javascript);
-let wordpress = document.getElementById("wordpress");
-crearBarra(wordpress);
-let photoshop = document.getElementById("photoshop");
-crearBarra(photoshop);
-let php = document.getElementById("php");
-crearBarra(php);
-let ilustrator = document.getElementById("ilustrator");
-crearBarra(ilustrator);
+let sql = document.getElementById("sql");
+crearBarra(sql);
+
+let redes = document.getElementById("redes");
+crearBarra(redes);
+let c = document.getElementById("c");
+crearBarra(c);
+let cmas = document.getElementById("cmas");
+crearBarra(cmas);
+
+let phyton = document.getElementById("phyton");
+crearBarra(phyton);
+
+let sap = document.getElementById("sap");
+crearBarra(sap);
+
+let excel = document.getElementById("excel");
+crearBarra(excel);
+
+let ux = document.getElementById("ux");
+crearBarra(ux);
 
 //Ahora voy a guardar la cantidad de barritas que se van a ir pintando por cada barar
 //para eso utilizo un arreglo, cada posiciòn pertenece a un elemento
 //comienzan en -1 porque no tiene ninguna pintada al iniciarse
-let contadores = [-1,-1,-1,-1,-1,-1];
+let contadores = [-1,-1,-1,-1,-1,-1,-1,-1,-1,-1];
 //esta variable la voy a utilizar de bandera para saber si ya ejecuto la animación
 let entro = false;
 
@@ -57,23 +71,41 @@ function efectoHabilidades(){
     if(distancia_skills>=300 && entro==false){
         entro = true;
         const intervalHtml = setInterval(function(){
-            pintarBarra(html, 16, 0, intervalHtml);
-        },100);
+            pintarBarra(html, 18, 0, intervalHtml);
+        }, 100);
+        
         const intervalJavascript = setInterval(function(){
-            pintarBarra(javascript, 11, 1, intervalJavascript);
+            pintarBarra(javascript, 12, 1, intervalJavascript);
+        }, 100);
+        
+        const intervalSql = setInterval(function(){
+            pintarBarra(sql, 18, 2, intervalSql);
+        }, 100);
+        
+        const intervalRedes= setInterval(function(){
+            pintarBarra(redes, 10, 3, intervalRedes);
         },100);
-        const intervalWordpress = setInterval(function(){
-            pintarBarra(wordpress, 14, 2, intervalWordpress);
+        const intervalC = setInterval(function(){
+            pintarBarra(c, 10, 4, intervalC);
         },100);
-        const intervalPhotoshop = setInterval(function(){
-            pintarBarra(photoshop, 08, 3, intervalPhotoshop);
-        },100);
-        const intervalPhp = setInterval(function(){
-            pintarBarra(php, 08, 4, intervalPhp);
-        },100);
-        const intervalIlustrator = setInterval(function(){
-            pintarBarra(ilustrator, 08, 5, intervalIlustrator);
-        },100);
+        const intervalCmas = setInterval(function(){
+            pintarBarra(cmas, 10, 5, intervalCmas);
+        }, 100);
+          const intervalPhyton = setInterval(function(){
+            pintarBarra(phyton, 06, 6, intervalPhyton);
+          }, 100);
+        
+        const intervalSap = setInterval(function(){
+            pintarBarra(sap, 06, 7, intervalSap);
+        }, 100);
+         const intervalExcel = setInterval(function(){
+            pintarBarra(excel, 16, 8, intervalExcel);
+          }, 100);
+        
+        const intervalUx = setInterval(function(){
+            pintarBarra(ux, 14, 9, intervalUx);
+        }, 100);
+        
     }
 }
 
