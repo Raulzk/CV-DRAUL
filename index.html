@@ -1,26 +1,25 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
         integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="estilo.css">
-    <title>DESIDERIO RAUL NUÑEZ GUZMAN</title>
+    <title>Desiderio Raul Nuñez Guzman</title>
 </head>
-
 <body>
     <!-- SECCION INICIO -->
-    <section class="inicio" id="inicio">
+    <section class="inicio" id="inicio" aria-labelledby="inicio-titulo">
         <div class="contenido-seccion">
             <header>
-                <div class="nav-bar" onclick="mostrarOcultarMenu()">
-                    <i class="fa-solid fa-bars"></i>
-                </div>
-                <nav id="nav" class="nav">
+                <button class="nav-bar" aria-expanded="false" aria-controls="nav" onclick="mostrarOcultarMenu()">
+                    <i class="fa-solid fa-bars" aria-hidden="true"></i>
+                    <span class="sr-only">Abrir menú</span>
+                </button>
+                <nav id="nav" class="nav" aria-hidden="true">
                     <a href="#inicio">Inicio</a>
                     <a href="#sobremi">Sobre mí</a>
                     <a href="#habilidades">Habilidades</a>
@@ -33,208 +32,187 @@
                 </div>
             </header>
             <div class="info">
-                <h1>DESIDERIO RAUL NUÑEZ GUZMAN</h1>
-                <h2> ESTUDIANTE DE LA CARRERA DE INGENIERÍA DE SISTEMAS DE INFORMACIÓN</h2>
+                <h1>Desiderio Raul Nuñez Guzman</h1>
+                <h2>Egresado de Ingeniería de Sistemas de Información</h2>
                 <div class="redes">
-                    <a href="https://www.facebook.com/profile.php?id=100080225571523"><i
-                            class="fa-brands fa-facebook-f"></i></a>
-                    <a href="https://github.com/Raulzk"><i class="fa-brands fa-square-github"></i></a>
-                    <a href="https://www.youtube.com/channel/UCHbVguLMLJKVLL2A0Nu1MwQ"><i
-                            class="fa-brands fa-youtube"></i></a>
-                    <a href="https://www.linkedin.com/in/desiderio-raul-nu%C3%B1ez-guzman-9563b820b/"><i
-                            class="fa-brands fa-linkedin-in"></i></a>
-
+                    <a href="https://www.facebook.com/profile.php?id=100080225571523" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://github.com/Raulzk" aria-label="GitHub"><i class="fa-brands fa-square-github"></i></a>
+                    <a href="https://www.youtube.com/channel/UCHbVguLMLJKVLL2A0Nu1MwQ" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="https://www.linkedin.com/in/desiderio-raul-nu%C3%B1ez-guzman-9563b820b/" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
                 </div>
             </div>
             <div class="foto">
-                <img src="img/miFoto.jpeg" alt="Foto de Raul">
+                <img src="img/miFoto.jpg" alt="Foto de Desiderio Raul Nuñez Guzman">
             </div>
         </div>
     </section>
 
     <!-- SECCION SOBRE MI -->
-    <section class="sobremi" id="sobremi">
+    <section class="sobremi" id="sobremi" aria-labelledby="sobremi-titulo">
         <div class="contenido-seccion">
-            <h2 class="titulo-seccion">Sobre Mi</h2>
-            <h3>Detalles personales</h3>
-
-            <p class="especial"> Estudiante de Ingeniería de Sistemas de Información de la Universidad Peruana de
-                Ciencias
-                Aplicadas(UPC)
-            </p>
-
-
+            <h2 class="titulo-seccion" id="sobremi-titulo">Sobre Mí</h2>
+            <h3>Detalles Personales</h3>
+            <p class="especial">Egresado de Ingeniería de Sistemas de Información por la Universidad Peruana de Ciencias Aplicadas (UPC), perteneciente al Tercio Superior y beneficiario del Programa Nacional de Becas y Crédito Educativo (Pronabec). Reconocido por la excelencia académica y el compromiso con el desarrollo del país. Poseo experiencia en automatización de procesos y dominio de Python, así como sólidos conocimientos en programación, gestión de bases de datos y desarrollo de aplicaciones web y móviles. Me caracterizo por mi capacidad de aprendizaje continuo, adaptabilidad y orientación a resultados, aportando soluciones eficientes e innovadoras en entornos profesionales.</p>
             <div class="fila">
-                <div class="col">
-                    <i class="fa-solid fa-user"></i>
+                <div class="col card-3d">
+                    <i class="fa-solid fa-user" aria-hidden="true"></i>
                     <span class="titulo-detalle">Perfil</span>
-                    <p> Soy una persona que le gusta aprender y enfrentar los nuevos retos y apasionado por la
-                        tecnología de la información. Poseo
-                        conocimientos de programación y desarrollo de software, así como conocimientos
-                        en bases de datos,Contabilidad,arquitectura de negocios y redes. </p>
+                    <p>Egresado de Ingeniería de Sistemas de Información por la UPC, perteneciente al tercio superior y beneficiario de PRONABEC.</p>
                 </div>
-                <div class="col">
-                    <i class="fa-sharp fa-solid fa-desktop"></i>
-                    <span class="titulo-detalle">Habilidades</span>
-
-                    <li>Organización </li>
-                    <li>Puntualidad</li>
-                    <li>Atención al cliente</li>
-                    <li>Trabajo en equipo</li>
-                    <li>Proactivo </li>
-                    <li>Liderazgo</li>
+                <div class="col card-3d">
+                    <i class="fa-solid fa-desktop" aria-hidden="true"></i>
+                    <span class="titulo-detalle">Habilidades Blandas</span>
+                    <ul>
+                        <li>Organización</li>
+                        <li>Comunicación Efectiva</li>
+                        <li>Atención al cliente</li>
+                        <li>Trabajo en grupo</li>
+                        <li>Proactivo</li>
+                        <li>Liderazgo</li>
+                    </ul>
                 </div>
-                <div class="col">
-                    <i class="fa-solid fa-flag"></i>
-                    <span class="titulo-detalle">Intereses</span>
-                    <p>Apasionado por el desarrollo de software. Siempre estoy buscando oportunidades
-                        para aprender nuevos lenguajes de programación y explorar nuevas tecnologías. Ademas
-                        tengo un gran gusto por enseñar y compartir todo lo que he he aprendido. He tenido la
-                        oportunidad
-                        de impartir sesiones de toturia del curso de calculo II en la Universidad
-                    </p>
+                <div class="col card-3d">
+                    <i class="fa-solid fa-flag" aria-hidden="true"></i>
+                    <span class="titulo-detalle">Datos Personales</span>
+                    <ul>
+                        <li>Fecha de Nacimiento: 03/11/2000</li>
+                        <li>Nacionalidad: Perú</li>
+                        <li>Residencia Actual: Villa el Salvador, Lima</li>
+                    </ul>
                 </div>
-                <div class="col">
-                    <i class="fa solid fa-language"></i>
-                    <span class="titulo-detalle">edioma</span>
+                <div class="col card-3d">
+                    <i class="fa-solid fa-language" aria-hidden="true"></i>
+                    <span class="titulo-detalle">Idiomas</span>
                     <p>
-                        <span>Español(Castellano):</span>
-                        <span>Nativo</span>
-                        <br>
-                        <span>Inglés:</span>
-                        <span>Básico</span>
+                        <span>Español:</span> Nativo<br>
+                        <span>Inglés:</span> Nivel Intermedio (Universidad de Cambridge – IDIOMAS UPC, septiembre 2021 – 2025)
                     </p>
                 </div>
             </div>
-        </div>
-
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <span class="titulo"><button> <a
-                                href="https://drive.google.com/drive/folders/1-iPiruSDLWyERTfGg8U41POjlROpekSY?usp=sharing">
-                                Certificados</a> </button></span>
+            <h3>Cursos Especializados</h3>
+            <ul>
+                <li>Python: Udemy, 2025.</li>
+                <li>𝐆𝐞𝐬𝐭𝐢𝐨́𝐧 𝐝𝐞 𝐒𝐞𝐠𝐮𝐫𝐢𝐝𝐚𝐝 𝐝𝐞 𝐥𝐚 𝐈𝐧𝐟𝐨𝐫𝐦𝐚𝐜𝐢𝐨́𝐧: UPC, 2025</li>
+                <li>Fundamentos de Terminal y Línea de comandos en Linux: Udemy, 2024</li>
+                <li>Machine Learning on Google Cloud: Google Cloud, 2023</li>
+                <li>SQL para ciencia de datos: Universidad de California, 2022.</li>
+            </ul>
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <button class="cert-btn"><a href="https://drive.google.com/drive/folders/1-iPiruSDLWyERTfGg8U41POjlROpekSY?usp=sharing" aria-label="Ver Certificados">Certificados</a></button>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- SECCION HABILIDADES -->
-    <section class="habilidades" id="habilidades">
+    <section class="habilidades" id="habilidades" aria-labelledby="habilidades-titulo">
         <div class="contenido-seccion">
-            <h2 class="titulo-seccion">Mis habilidades</h2>
-            <h3></h3>
-
+            <h2 class="titulo-seccion" id="habilidades-titulo">Mis Habilidades Técnicas</h2>
             <div class="fila">
-                <div class="col">
-                    <span>HTML/CSS</span>
+                <div class="col skill-card">
+                    <span>Python / Pandas</span>
                     <div class="cont-barra">
-                        <div class="barra" id="html">
-                            <!-- mediante javascript luego genereremos 17 barritas con clase e -->
-
-                        </div>
+                        <div class="barra" id="python"></div>
                         <span>90%</span>
                     </div>
                 </div>
-                <div class="col">
-                    <span>JAVASCRIPT</span>
+                <div class="col skill-card">
+                    <span>C++ / C#</span>
                     <div class="cont-barra">
-                        <div class="barra" id="javascript">
-                            <!-- mediante javascript luego genereremos 17 barritas con clase e -->
-
-                        </div>
-                        <span>60%</span>
-                    </div>
-                </div>
-            </div>
-            <div class="fila">
-                <div class="col">
-                    <span>SQLserver</span>
-                    <div class="cont-barra">
-                        <div class="barra" id="sql">
-                            <!-- mediante javascript luego genereremos 17 barritas con clase e -->
-
-                        </div>
-                        <span>90%</span>
-                    </div>
-                </div>
-                <div class="col">
-                    <span>REDES</span>
-                    <div class="cont-barra">
-                        <div class="barra" id="redes">
-                            <!-- mediante javascript luego genereremos 17 barritas con clase e -->
-
-                        </div>
-                        <span>50%</span>
-                    </div>
-                </div>
-            </div>
-            <div class="fila">
-                <div class="col">
-                    <span>C++</span>
-                    <div class="cont-barra">
-                        <div class="barra" id="c">
-                            <!-- mediante javascript luego genereremos 17 barritas con clase e -->
-
-                        </div>
-                        <span>50%</span>
-                    </div>
-                </div>
-                <div class="col">
-                    <span>C#</span>
-                    <div class="cont-barra">
-                        <div class="barra" id="cmas">
-                            <!-- mediante javascript luego genereremos 17 barritas con clase e -->
-
-                        </div>
-                        <span>50%</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="fila">
-                <div class="col">
-                    <span>PHYTON</span>
-                    <div class="cont-barra">
-                        <div class="barra" id="phyton">
-                            <!-- mediante javascript luego genereremos 17 barritas con clase e -->
-
-                        </div>
-                        <span>30%</span>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <span>SAP</span>
-                    <div class="cont-barra">
-                        <div class="barra" id="sap">
-                            <!-- mediante javascript luego genereremos 17 barritas con clase e -->
-
-                        </div>
-                        <span>30%</span>
-                    </div>
-                </div>
-            </div>
-            <div class="fila">
-                <div class="col">
-                    <span>MANEJO DE EXCEL</span>
-                    <div class="cont-barra">
-                        <div class="barra" id="excel">
-                            <!-- mediante javascript luego genereremos 17 barritas con clase e -->
-
-                        </div>
+                        <div class="barra" id="cpp"></div>
                         <span>80%</span>
                     </div>
                 </div>
-
-                <div class="col">
-                    <span>DISEÑO UX</span>
+            </div>
+            <div class="fila">
+                <div class="col skill-card">
+                    <span>Java / JavaScript / TypeScript</span>
                     <div class="cont-barra">
-                        <div class="barra" id="ux">
-                            <!-- mediante javascript luego genereremos 17 barritas con clase e -->
-
-                        </div>
+                        <div class="barra" id="java"></div>
+                        <span>80%</span>
+                    </div>
+                </div>
+                <div class="col skill-card">
+                    <span>PHP / HTML / CSS / SQL</span>
+                    <div class="cont-barra">
+                        <div class="barra" id="php"></div>
                         <span>70%</span>
+                    </div>
+                </div>
+            </div>
+            <div class="fila">
+                <div class="col skill-card">
+                    <span>PostgreSQL / SQL Server / Oracle / MongoDB / SQLite</span>
+                    <div class="cont-barra">
+                        <div class="barra" id="databases"></div>
+                        <span>85%</span>
+                    </div>
+                </div>
+                <div class="col skill-card">
+                    <span>Angular / React.js / React Native / Vue.js / Node.js / Express.js / .NET / Spring Boot</span>
+                    <div class="cont-barra">
+                        <div class="barra" id="frameworks"></div>
+                        <span>75%</span>
+                    </div>
+                </div>
+            </div>
+            <div class="fila">
+                <div class="col skill-card">
+                    <span>AWS / Azure / Google Cloud / VirtualBox / Google Colab</span>
+                    <div class="cont-barra">
+                        <div class="barra" id="cloud"></div>
+                        <span>70%</span>
+                    </div>
+                </div>
+                <div class="col skill-card">
+                    <span>Power BI / Power Automate / Google Analytics / Google Apps Script / Apache NiFi</span>
+                    <div class="cont-barra">
+                        <div class="barra" id="analytics"></div>
+                        <span>80%</span>
+                    </div>
+                </div>
+            </div>
+            <div class="fila">
+                <div class="col skill-card">
+                    <span>Dynatrace / Elastic / Zabbix</span>
+                    <div class="cont-barra">
+                        <div class="barra" id="monitoring"></div>
+                        <span>65%</span>
+                    </div>
+                </div>
+                <div class="col skill-card">
+                    <span>SAP S/4HANA</span>
+                    <div class="cont-barra">
+                        <div class="barra" id="erp"></div>
+                        <span>70%</span>
+                    </div>
+                </div>
+            </div>
+            <div class="fila">
+                <div class="col skill-card">
+                    <span>Jira / Trello / Rational Team Concert (RTC)</span>
+                    <div class="cont-barra">
+                        <div class="barra" id="management"></div>
+                        <span>75%</span>
+                    </div>
+                </div>
+                <div class="col skill-card">
+                    <span>Git / GitHub / Visual Studio / VS Code / XAMPP</span>
+                    <div class="cont-barra">
+                        <div class="barra" id="tools"></div>
+                        <span>85%</span>
+                    </div>
+                </div>
+            </div>
+            <div class="fila">
+                <div class="col skill-card">
+                    <span>Bash/Shell</span>
+                    <div class="cont-barra">
+                        <div class="barra" id="shell"></div>
+                        <span>60%</span>
                     </div>
                 </div>
             </div>
@@ -242,114 +220,74 @@
     </section>
 
     <!-- SECCION RESUMEN -->
-    <section class="resumen" id="resumen">
+    <section class="resumen" id="resumen" aria-labelledby="resumen-titulo">
         <div class="contenido-seccion">
-            <h2 class="titulo-seccion">Resumen</h2>
-            <h3>Mi preparación y experiencia</h3>
-            <div class="info">
-                <div class="col">
-                    <span class="titulo">Educación</span>
-                    <table>
-                        <tr>
-                            <td class="datos">
-                                <h3>2020 - Hasta la actualidad</h3>
-                            </td>
-                            <td rowspan="2" class="descripcion">
-                                <h2>Educación Previa</h2>
-                                <Li>Contabilidad</Li>
-                                <li>programación Orientado a objetos en c++ y c#</li>
-                                <Li>Diseño de Base de Datos</Li>
-                                <Li>Seminario de Investigación</Li>
-                                <Li>Arquitectura de Computadoras y Sistemas Operativos</Li>
-                                <LI>Arquitectura de Negocios</LI>
-                                <LI>IHC y Tecnologías Móviles (UX-Designer)</LI>
-                                <li>Emprendimiento de Negocios Sostenible</li>
-                                <li>Redes</li>
-                                <li>Arquitectura de Aplicaciones Web</li>
-                                <li>Diseño de Experimentos en SI</li>
-
-
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <h4>Ingenieria de Sistemas de Información</h4>
-                                <p>Universidad Peruana de Ciencias Aplicadas-UPC</p>
-
-                            </td>
-                        </tr>
-                    </table>
+            <h2 class="titulo-seccion" id="resumen-titulo">Resumen</h2>
+            <h3>Mi Preparación y Experiencia</h3>
+            <div class="timeline">
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h4>Educación</h4>
+                        <p>Universidad Peruana de Ciencias Aplicadas (UPC)</p>
+                        <h5>Ingeniería de Sistemas de Información - Agosto 2020 – Julio 2025</h5>
+                        <p>Perteneciente al tercio superior y beneficiario de PRONABEC.</p>
+                    </div>
                 </div>
-                <div class="col">
-                    <span class="titulo">Experiencia Laboral</span>
-                    <table>
-                        <tr>
-                            <td class="datos">
-                                <h3>3 meses</h3>
-                            </td>
-                            <td rowspan="2" class="descripcion">
-                                atención al cliente en una tienda de ropas
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <h4>Mercado Libre</h4>
-                                <p>vendedor</p>
-
-                            </td>
-                        </tr>
-                    </table>
-                    <table>
-                        <tr>
-                            <td class="datos">
-                                <h3>2 Años</h3>
-                            </td>
-                            <td rowspan="2" class="descripcion">
-                                acabados y retoques en diseño de interiores
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <h4>Ayudante</h4>
-
-                            </td>
-                        </tr>
-                    </table>
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <h4>Experiencia Laboral</h4>
+                        <p>Junio 2024 – Presente</p>
+                        <h5>Practicante de Operación CRM - América Móvil S.A.C. (Claro)</h5>
+                        <ul>
+                            <li>Extracción, limpieza y preprocesamiento de datos con Python.</li>
+                            <li>Automatización de procesos mediante scripts en Python.</li>
+                            <li>Diseño de dashboards en Power BI para la toma de decisiones.</li>
+                            <li>Optimización de bases de datos Oracle: paquetes, procedimientos y reportes.</li>
+                            <li>Monitoreo de servidores y alertas en Dynatrace.</li>
+                            <li>Administración de servidores Windows y Linux.</li>
+                            <li>Gestión de incidentes y requerimientos (99% de resolución).</li>
+                            <li>Documentación y mapeo de procesos de datos.</li>
+                            <li>Automatización de procesos mediante Apache NIFI.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h4>Experiencia Laboral</h4>
+                        <p>Diciembre 2023 – Marzo 2024</p>
+                        <h5>Desarrollador Web - Data Services Perú</h5>
+                        <ul>
+                            <li>Desarrollo y mantenimiento de la página web en PHP.</li>
+                            <li>Gestión de bases de datos con SQLite.</li>
+                            <li>Configuración y administración de entorno con XAMPP.</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- SECCION CONTACTO -->
-    <section class="contacto" id="contacto">
+    <section class="contacto" id="contacto" aria-labelledby="contacto-titulo">
         <div class="contenido-seccion">
-            <h2 class="titulo-seccion">Contacto</h2>
-            <h3>Ponte en contacto ahora mismo!</h3>
-
+            <h2 class="titulo-seccion" id="contacto-titulo">Contacto</h2>
+            <h3>¡Ponte en Contacto Ahora Mismo!</h3>
             <div class="fila">
-                <div class="col">
-                    <h2>
-                        <i class="fa-solid fa-phone"></i> Teléfono
-                    </h2>
+                <div class="col contact-card">
+                    <h2><i class="fa-solid fa-phone" aria-hidden="true"></i> Teléfono</h2>
                     <span class="info-contacto">984336652</span>
                 </div>
-                <div class="col">
-                    <h2>
-                        <i class="fa-solid fa-envelope"></i> Correo
-                    </h2>
-                    <span class="info-contacto">www.abcd2000raulnunez@gmail.com</span>
+                <div class="col contact-card">
+                    <h2><i class="fa-solid fa-envelope" aria-hidden="true"></i> Correo</h2>
+                    <span class="info-contacto">abcd2000raulnunez@gmail.com</span>
                 </div>
-                <div class="col">
-                    <h2>
-                        <i class="fa-brands fa-whatsapp"></i> Whatsapp
-                    </h2>
+                <div class="col contact-card">
+                    <h2><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> WhatsApp</h2>
                     <span class="info-contacto">984336652</span>
                 </div>
-                <div class="col">
-                    <h2>
-                        <i class="fa-sharp fa-solid  fa-location-dot"></i> Ubicacion
-                    </h2>
-                    <span class="info-contacto">Mz N,lote13,Residencial Unicachi,Villa el Salvador</span>
+                <div class="col contact-card">
+                    <h2><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Ubicación</h2>
+                    <span class="info-contacto">Villa el Salvador, Lima, Perú</span>
                 </div>
             </div>
         </div>
@@ -357,5 +295,4 @@
 
     <script src="app.js"></script>
 </body>
-
 </html>

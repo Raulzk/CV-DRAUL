@@ -1,127 +1,94 @@
-//Menu lateral
-var menu_visible = false;
-let menu = document.getElementById("nav");
-function mostrarOcultarMenu(){
-    if(menu_visible==false){//si esta oculto
-        menu.style.display = "block";
-        menu_visible = true;
-    }
-    else{
-        menu.style.display = "none";
-        menu_visible = false;
-    }
-}
-//oculto el menu una vez que selecciono una opción
-let links = document.querySelectorAll("nav a");
-for(var x = 0; x <links.length;x++){
-    links[x].onclick = function(){
-        menu.style.display = "none";
-        menu_visible = false;
-    }
+let menuVisible = false;
+const menu = document.getElementById("nav");
+const navBar = document.querySelector(".nav-bar");
+
+function mostrarOcultarMenu() {
+    menu.classList.toggle("show");
+    menuVisible = !menuVisible;
+    navBar.setAttribute("aria-expanded", menuVisible);
+    menu.setAttribute("aria-hidden", !menuVisible);
 }
 
-//Creo las barritas de una barra particular identificada por su id
-function crearBarra(id_barra){
-    for(i=0;i<=19;i++){
+const links = document.querySelectorAll("nav a");
+for (let link of links) {
+    link.addEventListener("click", () => {
+        menu.classList.remove("show");
+        menuVisible = false;
+        navBar.setAttribute("aria-expanded", "false");
+        menu.setAttribute("aria-hidden", "true");
+    });
+}
+
+function crearBarra(id_barra, max) {
+    for (let i = 0; i < max; i++) {
         let div = document.createElement("div");
         div.className = "e";
         id_barra.appendChild(div);
     }
 }
 
-//selecciono todas las barras generales par aluego manipularlas
-let html = document.getElementById("html");
-crearBarra(html);
+const python = document.getElementById("python");
+crearBarra(python, 20);
+const cpp = document.getElementById("cpp");
+crearBarra(cpp, 20);
+const java = document.getElementById("java");
+crearBarra(java, 20);
+const php = document.getElementById("php");
+crearBarra(php, 20);
+const databases = document.getElementById("databases");
+crearBarra(databases, 20);
+const frameworks = document.getElementById("frameworks");
+crearBarra(frameworks, 20);
+const cloud = document.getElementById("cloud");
+crearBarra(cloud, 20);
+const analytics = document.getElementById("analytics");
+crearBarra(analytics, 20);
+const monitoring = document.getElementById("monitoring");
+crearBarra(monitoring, 20);
+const erp = document.getElementById("erp");
+crearBarra(erp, 20);
+const management = document.getElementById("management");
+crearBarra(management, 20);
+const tools = document.getElementById("tools");
+crearBarra(tools, 20);
+const shell = document.getElementById("shell");
+crearBarra(shell, 20);
 
-let javascript = document.getElementById("javascript");
-crearBarra(javascript);
-let sql = document.getElementById("sql");
-crearBarra(sql);
-
-let redes = document.getElementById("redes");
-crearBarra(redes);
-let c = document.getElementById("c");
-crearBarra(c);
-let cmas = document.getElementById("cmas");
-crearBarra(cmas);
-
-let phyton = document.getElementById("phyton");
-crearBarra(phyton);
-
-let sap = document.getElementById("sap");
-crearBarra(sap);
-
-let excel = document.getElementById("excel");
-crearBarra(excel);
-
-let ux = document.getElementById("ux");
-crearBarra(ux);
-
-//Ahora voy a guardar la cantidad de barritas que se van a ir pintando por cada barar
-//para eso utilizo un arreglo, cada posiciòn pertenece a un elemento
-//comienzan en -1 porque no tiene ninguna pintada al iniciarse
-let contadores = [-1,-1,-1,-1,-1,-1,-1,-1,-1,-1];
-//esta variable la voy a utilizar de bandera para saber si ya ejecuto la animación
+let contadores = Array(13).fill(-1);
 let entro = false;
 
-//función que aplica las animaciones de la habilidades
-function efectoHabilidades(){
-    var habilidades = document.getElementById("habilidades");
-    var distancia_skills = window.innerHeight - habilidades.getBoundingClientRect().top;
-    if(distancia_skills>=300 && entro==false){
+function efectoHabilidades() {
+    const habilidades = document.getElementById("habilidades");
+    const distancia_skills = window.innerHeight - habilidades.getBoundingClientRect().top;
+    if (distancia_skills >= 300 && !entro) {
         entro = true;
-        const intervalHtml = setInterval(function(){
-            pintarBarra(html, 18, 0, intervalHtml);
-        }, 100);
-        
-        const intervalJavascript = setInterval(function(){
-            pintarBarra(javascript, 12, 1, intervalJavascript);
-        }, 100);
-        
-        const intervalSql = setInterval(function(){
-            pintarBarra(sql, 18, 2, intervalSql);
-        }, 100);
-        
-        const intervalRedes= setInterval(function(){
-            pintarBarra(redes, 10, 3, intervalRedes);
-        },100);
-        const intervalC = setInterval(function(){
-            pintarBarra(c, 10, 4, intervalC);
-        },100);
-        const intervalCmas = setInterval(function(){
-            pintarBarra(cmas, 10, 5, intervalCmas);
-        }, 100);
-          const intervalPhyton = setInterval(function(){
-            pintarBarra(phyton, 06, 6, intervalPhyton);
-          }, 100);
-        
-        const intervalSap = setInterval(function(){
-            pintarBarra(sap, 06, 7, intervalSap);
-        }, 100);
-         const intervalExcel = setInterval(function(){
-            pintarBarra(excel, 16, 8, intervalExcel);
-          }, 100);
-        
-        const intervalUx = setInterval(function(){
-            pintarBarra(ux, 14, 9, intervalUx);
-        }, 100);
-        
+        const intervals = [
+            setInterval(() => pintarBarra(python, 18, 0, intervals[0]), 100), // 90%
+            setInterval(() => pintarBarra(cpp, 16, 1, intervals[1]), 100), // 80%
+            setInterval(() => pintarBarra(java, 16, 2, intervals[2]), 100), // 80%
+            setInterval(() => pintarBarra(php, 14, 3, intervals[3]), 100), // 70%
+            setInterval(() => pintarBarra(databases, 17, 4, intervals[4]), 100), // 85%
+            setInterval(() => pintarBarra(frameworks, 15, 5, intervals[5]), 100), // 75%
+            setInterval(() => pintarBarra(cloud, 14, 6, intervals[6]), 100), // 70%
+            setInterval(() => pintarBarra(analytics, 16, 7, intervals[7]), 100), // 80%
+            setInterval(() => pintarBarra(monitoring, 13, 8, intervals[8]), 100), // 65%
+            setInterval(() => pintarBarra(erp, 14, 9, intervals[9]), 100), // 70%
+            setInterval(() => pintarBarra(management, 15, 10, intervals[10]), 100), // 75%
+            setInterval(() => pintarBarra(tools, 17, 11, intervals[11]), 100), // 85%
+            setInterval(() => pintarBarra(shell, 12, 12, intervals[12]), 100) // 60%
+        ];
     }
 }
 
-//lleno una barra particular con la cantidad indicada
-function pintarBarra(id_barra, cantidad, indice, interval){
+function pintarBarra(id_barra, cantidad, indice, interval) {
     contadores[indice]++;
-    x = contadores[indice];
-    if(x < cantidad){
+    let x = contadores[indice];
+    if (x < cantidad) {
         let elementos = id_barra.getElementsByClassName("e");
         elementos[x].style.backgroundColor = "#940253";
-    }else{
-        clearInterval(interval)
+    } else {
+        clearInterval(interval);
     }
 }
 
-//detecto el scrolling del mouse para aplicar la animación de la barra
-window.onscroll = function(){
-    efectoHabilidades();
-}
+window.addEventListener("scroll", efectoHabilidades);
