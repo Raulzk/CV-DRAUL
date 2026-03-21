@@ -3,91 +3,328 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proyectos</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <title>Proyectos — Desiderio Raul Nuñez Guzman</title>
+    <style>
+        :root {
+            --accent:#c8f53a; --accent2:#940253;
+            --dark:#07070f; --dark2:#0d0d1a;
+            --card:#111120; --text:#eaeaf5; --muted:#6e6e90;
+            --border:rgba(200,245,58,0.12); --border2:rgba(200,245,58,0.28);
+        }
+        *{margin:0;padding:0;box-sizing:border-box;}
+        html{scroll-behavior:smooth;}
+        body{font-family:'Inter',sans-serif;background:var(--dark);color:var(--text);overflow-x:hidden;min-height:100vh;}
+
+        #stars-canvas{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;}
+        .code-rain{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
+        .code-line{position:absolute;bottom:0;font-family:'Space Mono',monospace;font-size:10px;color:rgba(200,245,58,0.15);white-space:nowrap;animation:rain linear infinite;padding:0 8px 6px;}
+        @keyframes rain{from{transform:translateY(100vh)}to{transform:translateY(-110vh)}}
+
+        header{position:fixed;top:0;width:100%;padding:16px 48px;display:flex;justify-content:space-between;align-items:center;z-index:100;background:rgba(7,7,15,0.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
+        .logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.4rem;letter-spacing:-1px;color:var(--text);text-decoration:none;}
+        .logo span{color:var(--accent);}
+        nav{display:flex;gap:28px;align-items:center;}
+        nav a{color:var(--muted);text-decoration:none;font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;transition:color .2s;}
+        nav a:hover{color:var(--accent);}
+        .nav-cta{padding:8px 20px;background:var(--accent);color:#000;font-weight:700;font-size:11px;border-radius:6px;letter-spacing:.06em;text-transform:uppercase;transition:transform .2s;}
+        .nav-cta:hover{color:#000!important;transform:translateY(-1px);}
+
+        /* PAGE HERO */
+        .page-hero{position:relative;z-index:1;padding:130px 48px 60px;max-width:1100px;margin:auto;}
+        .page-label{font-family:'Space Mono',monospace;font-size:10px;color:var(--accent);letter-spacing:.18em;text-transform:uppercase;margin-bottom:12px;}
+        .page-title{font-family:'Syne',sans-serif;font-size:clamp(2.2rem,5vw,3.8rem);font-weight:800;letter-spacing:-2px;margin-bottom:16px;}
+        .page-title span{color:var(--accent);}
+        .page-desc{font-size:15px;color:var(--muted);line-height:1.7;max-width:560px;}
+
+        /* FILTER */
+        .filter-wrap{position:relative;z-index:1;padding:0 48px 40px;max-width:1100px;margin:auto;}
+        .filter-btns{display:flex;gap:10px;flex-wrap:wrap;}
+        .filter-btn{padding:7px 18px;border:1px solid var(--border);background:var(--card);color:var(--muted);font-size:12px;font-family:'Space Mono',monospace;border-radius:999px;cursor:pointer;transition:all .2s;letter-spacing:.05em;}
+        .filter-btn.active,.filter-btn:hover{border-color:var(--border2);color:var(--accent);background:rgba(200,245,58,.07);}
+
+        /* GRID */
+        .projects-wrap{position:relative;z-index:1;padding:0 48px 100px;max-width:1100px;margin:auto;}
+        .projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:20px;}
+
+        .proj-card{
+            background:var(--card);border:1px solid var(--border);border-radius:16px;
+            overflow:hidden;display:flex;flex-direction:column;
+            transition:transform .3s,border-color .3s;
+        }
+        .proj-card:hover{transform:translateY(-5px);border-color:var(--border2);}
+
+        .proj-media{width:100%;height:200px;overflow:hidden;background:#0a0a18;position:relative;}
+        .proj-media img{width:100%;height:100%;object-fit:cover;transition:transform .4s;}
+        .proj-card:hover .proj-media img{transform:scale(1.04);}
+        .proj-media iframe{width:100%;height:100%;border:none;}
+        .proj-media-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:48px;background:linear-gradient(135deg,#0d0d1a,#1a0a2e);}
+
+        .proj-body{padding:22px 24px;display:flex;flex-direction:column;gap:10px;flex:1;}
+        .proj-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;}
+        .proj-year{font-family:'Space Mono',monospace;font-size:10px;color:var(--accent);letter-spacing:.1em;}
+        .proj-status{font-size:10px;padding:2px 9px;border-radius:999px;font-family:'Space Mono',monospace;letter-spacing:.05em;}
+        .proj-status.live{background:rgba(200,245,58,.1);color:var(--accent);border:1px solid var(--border2);}
+        .proj-status.wip{background:rgba(255,180,0,.08);color:#ffb400;border:1px solid rgba(255,180,0,.2);}
+        .proj-status.academic{background:rgba(148,2,83,.12);color:#d080b0;border:1px solid rgba(148,2,83,.25);}
+        .proj-name{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;color:var(--text);line-height:1.2;}
+        .proj-desc{font-size:13px;color:var(--muted);line-height:1.65;flex:1;}
+        .proj-stack{display:flex;flex-wrap:wrap;gap:5px;margin-top:4px;}
+        .proj-tag{padding:3px 9px;background:rgba(148,2,83,.1);border:1px solid rgba(148,2,83,.22);border-radius:999px;font-size:10px;color:#d080b0;}
+        .proj-actions{display:flex;gap:10px;margin-top:6px;flex-wrap:wrap;}
+        .proj-btn{padding:8px 18px;font-size:11px;font-weight:700;border-radius:7px;cursor:pointer;text-decoration:none;letter-spacing:.06em;text-transform:uppercase;transition:all .2s;}
+        .proj-btn.primary{background:var(--accent);color:#000;border:none;}
+        .proj-btn.primary:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(200,245,58,.3);}
+        .proj-btn.ghost{background:transparent;color:var(--text);border:1px solid rgba(255,255,255,.12);}
+        .proj-btn.ghost:hover{border-color:var(--accent);color:var(--accent);}
+
+        /* BACK BTN */
+        .back-wrap{position:relative;z-index:1;padding:0 48px;max-width:1100px;margin:auto 0;padding-top:20px;}
+
+        footer{position:relative;z-index:1;text-align:center;padding:28px 48px;border-top:1px solid var(--border);font-size:11px;color:var(--muted);font-family:'Space Mono',monospace;}
+        footer span{color:var(--accent);}
+
+        @media(max-width:768px){
+            header{padding:14px 20px;}
+            .page-hero,.filter-wrap,.projects-wrap{padding-left:20px;padding-right:20px;}
+            .projects-grid{grid-template-columns:1fr;}
+        }
+    </style>
 </head>
 <body>
-    <div class="container proyecto">
-        <div class="row justify-content-center">
-            <div class="col-12" style="background-color: #940253; color: white;">
-                <h1 class="titulo text-center">Mis Proyectos</h1>
-            </div>
-        </div>
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-            <div class="col">
-                <div class="project-card">
-                    <h2 class="otroProyecto text-center">Dedicatoria 3D (2025)</h2>
-                    <div class="media-container">
-                        <img src="img/dedicatoria.png" alt="Imagen de Dedicatoria 3D" class="project-media">
-                    </div>
-                    <a href="https://raulzk.github.io/amor/flower.html" class="d-block text-center mb-2"><button class="but">Ver Proyecto</button></a>
-                    <p class="text-center">Aplicación web interactiva con un corazón 3D animado y pétalos cayendo, diseñada como una dedicatoria personalizada. Desarrollada con HTML, CSS y JavaScript puro.</p>
-                </div>
-            </div>
-            <div class="col">
-                <div class="project-card">
-                    <h2 class="otroProyecto text-center">Tuck tuck (En curso)</h2>
-                    <div class="media-container">
-                        <img src="img/tucktuck.webp" alt="Imagen de Tuck tuck" class="project-media">
-                    </div>
-                    <p class="text-center">Aplicación web similar a TikTok utilizando React.js para el frontend y Node.js con Express.js para el backend, junto con MongoDB como base de datos.</p>
-                </div>
-            </div>
-            <div class="col">
-                <div class="project-card">
-                    <h2 class="otroProyecto text-center">Proyecto de Tesis (2025)</h2>
-                    <div class="media-container">
-                        <img src="img/tesis.png" alt="Imagen de Proyecto de Tesis" class="project-media">
-                    </div>
-                    <p class="text-center">Plataforma web para análisis de archivos ejecutables (.dll, .exe) utilizando Machine Learning (Random Forest) con Flask y PostgreSQL, capaz de predecir riesgos y emitir alertas.</p>
-                </div>
-            </div>
-            <div class="col">
-                <div class="project-card">
-                    <h2 class="otroProyecto text-center">QUETRABAJO (2024)</h2>
-                    <div class="media-container">
-                        <iframe src="https://www.youtube.com/embed/0092ZSTSdj4"
-                            title="Video del proyecto QUETRABAJO" frameborder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen class="project-media"></iframe>
-                    </div>
-                    <a href="https://que-trabajo-web.web.app/landing-page" class="d-block text-center mb-2"><button class="but">Link del Proyecto</button></a>
-                    <p class="text-center">Plataforma web que conecta trabajadores independientes con clientes. Frontend en Angular, backend en Java Spring Boot, base de datos PostgreSQL y documentación en Swagger/Postman.</p>
-                </div>
-            </div>
-            <div class="col">
-                <div class="project-card">
-                    <h2 class="otroProyecto text-center">Selva Center (2023)</h2>
-                    <div class="media-container">
-                        <img src="img/descarga.jpg" alt="Imagen de Selva Center" class="project-media">
-                    </div>
-                    <p class="text-center">Implementación del ERP SAP S/4HANA, configurando módulos clave para optimización de procesos.</p>
-                </div>
-            </div>
-            <div class="col">
-                <div class="project-card">
-                    <h2 class="otroProyecto text-center">The Sea Reality (2022)</h2>
-                    <div class="media-container">
-                        <img src="img/juego.jpeg" alt="Imagen de The Sea Reality" class="project-media">
-                    </div>
-                    <p class="text-center">Videojuego educativo 2D en C# con SQL Server y Unity, diseñado para concienciar sobre el cuidado del medio ambiente.</p>
-                </div>
-            </div>
-            <div class="col">
-                <div class="project-card">
-                    <h2 class="otroProyecto text-center">Proyecto de Enel</h2>
-                    <div class="media-container">
-                        <iframe src="https://www.youtube.com/embed/r1wfn1r9pSY"
-                            title="Video del proyecto Enel" frameborder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen class="project-media"></iframe>
-                    </div>
-                    <p class="text-center">Proyecto desarrollado para Enel, un prototipo de página web y aplicación con características para registro de usuarios, inicio de sesión, navegación y acceso al historial de facturación y tutoriales, enfocándose en un diseño amigable para el usuario y credibilidad.</p>
-                </div>
-            </div>
-        </div>
+
+<canvas id="stars-canvas"></canvas>
+<div class="code-rain" id="codeRain"></div>
+
+<header>
+    <a href="index.html" class="logo">D<span>Raul</span></a>
+    <nav>
+        <a href="index.html#sobre">Sobre mí</a>
+        <a href="index.html#skills">Skills</a>
+        <a href="index.html#experiencia">Experiencia</a>
+        <a href="index.html#contacto" class="nav-cta">Contáctame</a>
+    </nav>
+</header>
+
+<div class="page-hero">
+    <p class="page-label">// Portfolio completo</p>
+    <h2 class="page-title">Mis <span>Proyectos</span></h2>
+    <p class="page-desc">Proyectos académicos, laborales y personales que reflejan mis habilidades técnicas en desarrollo web, data, automatización y machine learning.</p>
+</div>
+
+<div class="filter-wrap">
+    <div class="filter-btns">
+        <button class="filter-btn active" data-filter="all">Todos</button>
+        <button class="filter-btn" data-filter="data">Data & Automatización</button>
+        <button class="filter-btn" data-filter="web">Desarrollo Web</button>
+        <button class="filter-btn" data-filter="ml">Machine Learning</button>
+        <button class="filter-btn" data-filter="academic">Académico</button>
     </div>
+</div>
+
+<div class="projects-wrap">
+    <div class="projects-grid" id="projectsGrid">
+
+        <!-- API FIRMAS -->
+        <div class="proj-card" data-cats="data ml">
+            <div class="proj-media"><div class="proj-media-placeholder">🔍</div></div>
+            <div class="proj-body">
+                <div class="proj-top">
+                    <div class="proj-year">Claro Perú · 2024</div>
+                    <span class="proj-status live">Producción</span>
+                </div>
+                <div class="proj-name">API de Detección de Firmas en PDFs</div>
+                <div class="proj-desc">API en Python para análisis automático de contratos y detección de firmas digitales en más de 3,000 documentos PDF. Usa visión computacional con OpenCV y Poppler para procesar documentos de manera masiva y eficiente.</div>
+                <div class="proj-stack">
+                    <span class="proj-tag">Python</span><span class="proj-tag">OpenCV</span>
+                    <span class="proj-tag">Poppler</span><span class="proj-tag">REST API</span><span class="proj-tag">Linux</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- TESIS -->
+        <div class="proj-card" data-cats="ml academic web">
+            <div class="proj-media"><img src="img/tesis.png" alt="Proyecto de Tesis" onerror="this.parentElement.innerHTML='<div class=proj-media-placeholder>🛡️</div>'"></div>
+            <div class="proj-body">
+                <div class="proj-top">
+                    <div class="proj-year">2025 · Tesis</div>
+                    <span class="proj-status academic">Académico</span>
+                </div>
+                <div class="proj-name">Plataforma de Análisis de Malware con ML</div>
+                <div class="proj-desc">Plataforma web para análisis de archivos ejecutables (.dll, .exe) usando Machine Learning (Random Forest). Predice riesgos de seguridad y emite alertas automáticas en tiempo real.</div>
+                <div class="proj-stack">
+                    <span class="proj-tag">Python</span><span class="proj-tag">Flask</span>
+                    <span class="proj-tag">PostgreSQL</span><span class="proj-tag">Random Forest</span><span class="proj-tag">scikit-learn</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- QUETRABAJO -->
+        <div class="proj-card" data-cats="web academic">
+            <div class="proj-media">
+                <iframe src="https://www.youtube.com/embed/0092ZSTSdj4" title="QUETRABAJO" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="proj-body">
+                <div class="proj-top">
+                    <div class="proj-year">2024</div>
+                    <span class="proj-status live">Desplegado</span>
+                </div>
+                <div class="proj-name">QueTrabajo — Plataforma de empleos</div>
+                <div class="proj-desc">Plataforma web que conecta trabajadores independientes con clientes. Arquitectura full stack completa con documentación API en Swagger/Postman y despliegue en Firebase.</div>
+                <div class="proj-stack">
+                    <span class="proj-tag">Angular</span><span class="proj-tag">Spring Boot</span>
+                    <span class="proj-tag">PostgreSQL</span><span class="proj-tag">Swagger</span><span class="proj-tag">Firebase</span>
+                </div>
+                <div class="proj-actions">
+                    <a href="https://que-trabajo-web.web.app/landing-page" target="_blank" class="proj-btn primary">Ver proyecto</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- TUCKTUCK -->
+        <div class="proj-card" data-cats="web">
+            <div class="proj-media"><img src="img/tucktuck.webp" alt="TuckTuck" onerror="this.parentElement.innerHTML='<div class=proj-media-placeholder>🎬</div>'"></div>
+            <div class="proj-body">
+                <div class="proj-top">
+                    <div class="proj-year">En curso</div>
+                    <span class="proj-status wip">En desarrollo</span>
+                </div>
+                <div class="proj-name">TuckTuck — App tipo TikTok</div>
+                <div class="proj-desc">Aplicación web de video social con sistema de feed, autenticación de usuarios, subida de contenido multimedia y reproductor integrado.</div>
+                <div class="proj-stack">
+                    <span class="proj-tag">React.js</span><span class="proj-tag">Node.js</span>
+                    <span class="proj-tag">Express.js</span><span class="proj-tag">MongoDB</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ENEL -->
+        <div class="proj-card" data-cats="web academic">
+            <div class="proj-media">
+                <iframe src="https://www.youtube.com/embed/r1wfn1r9pSY" title="Proyecto Enel" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="proj-body">
+                <div class="proj-top">
+                    <div class="proj-year">Académico</div>
+                    <span class="proj-status academic">Prototipo</span>
+                </div>
+                <div class="proj-name">Enel — Portal de facturación digital</div>
+                <div class="proj-desc">Prototipo de página web y aplicación para Enel con registro de usuarios, inicio de sesión, historial de facturación y tutoriales. Diseño UX enfocado en accesibilidad y confianza.</div>
+                <div class="proj-stack">
+                    <span class="proj-tag">HTML</span><span class="proj-tag">CSS</span>
+                    <span class="proj-tag">JavaScript</span><span class="proj-tag">UX/UI</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- SELVA CENTER -->
+        <div class="proj-card" data-cats="academic data">
+            <div class="proj-media"><img src="img/descarga.jpg" alt="Selva Center" onerror="this.parentElement.innerHTML='<div class=proj-media-placeholder>🏢</div>'"></div>
+            <div class="proj-body">
+                <div class="proj-top">
+                    <div class="proj-year">2023</div>
+                    <span class="proj-status academic">Académico</span>
+                </div>
+                <div class="proj-name">Selva Center — ERP SAP S/4HANA</div>
+                <div class="proj-desc">Implementación y configuración de módulos clave del ERP SAP S/4HANA para optimización de procesos empresariales: finanzas, logística y gestión de materiales.</div>
+                <div class="proj-stack">
+                    <span class="proj-tag">SAP S/4HANA</span><span class="proj-tag">ERP</span><span class="proj-tag">Business Processes</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- THE SEA REALITY -->
+        <div class="proj-card" data-cats="academic">
+            <div class="proj-media"><img src="img/juego.jpeg" alt="The Sea Reality" onerror="this.parentElement.innerHTML='<div class=proj-media-placeholder>🎮</div>'"></div>
+            <div class="proj-body">
+                <div class="proj-top">
+                    <div class="proj-year">2022</div>
+                    <span class="proj-status academic">Académico</span>
+                </div>
+                <div class="proj-name">The Sea Reality — Videojuego educativo</div>
+                <div class="proj-desc">Videojuego 2D educativo sobre el cuidado del medio ambiente con mecánicas interactivas, sistema de niveles y base de datos integrada para registro de progreso.</div>
+                <div class="proj-stack">
+                    <span class="proj-tag">C#</span><span class="proj-tag">Unity</span><span class="proj-tag">SQL Server</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- DEDICATORIA 3D -->
+        <div class="proj-card" data-cats="web">
+            <div class="proj-media"><img src="img/dedicatoria.png" alt="Dedicatoria 3D" onerror="this.parentElement.innerHTML='<div class=proj-media-placeholder>❤️</div>'"></div>
+            <div class="proj-body">
+                <div class="proj-top">
+                    <div class="proj-year">2025</div>
+                    <span class="proj-status live">Desplegado</span>
+                </div>
+                <div class="proj-name">Dedicatoria 3D Interactiva</div>
+                <div class="proj-desc">Aplicación web con animaciones 3D: corazón animado y pétalos cayendo. Desarrollada con HTML, CSS y JavaScript puro sin librerías externas usando Canvas API.</div>
+                <div class="proj-stack">
+                    <span class="proj-tag">HTML</span><span class="proj-tag">CSS</span>
+                    <span class="proj-tag">JavaScript</span><span class="proj-tag">Canvas API</span>
+                </div>
+                <div class="proj-actions">
+                    <a href="https://raulzk.github.io/amor/flower.html" target="_blank" class="proj-btn primary">Ver proyecto</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<footer><p>Diseñado y desarrollado por <span>Desiderio Raul Nuñez Guzman</span> · Lima, Perú · 2025</p></footer>
+
+<script>
+// STARS
+const canvas = document.getElementById('stars-canvas');
+const ctx = canvas.getContext('2d');
+function resize(){ canvas.width=window.innerWidth; canvas.height=window.innerHeight; }
+resize(); window.addEventListener('resize',resize);
+const stars = Array.from({length:120},()=>({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*1.3+.2,s:Math.random()*.2+.04,o:Math.random()*.5+.3}));
+function drawStars(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    stars.forEach(s=>{
+        ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+        ctx.fillStyle=`rgba(255,255,255,${s.o*(0.8+Math.random()*.2)})`;ctx.fill();
+        s.y-=s.s;if(s.y<0){s.y=canvas.height;s.x=Math.random()*canvas.width;}
+    });requestAnimationFrame(drawStars);
+} drawStars();
+
+// CODE RAIN
+const rain=document.getElementById('codeRain');
+const ls=['python','pandas','oracle','powerbi','flask','react','nifi','automate','sql'];
+for(let i=0;i<14;i++){
+    const el=document.createElement('div');el.className='code-line';
+    el.textContent=ls[Math.floor(Math.random()*ls.length)];
+    el.style.left=`${Math.random()*100}%`;
+    el.style.animationDuration=`${9+Math.random()*10}s`;
+    el.style.animationDelay=`${Math.random()*9}s`;
+    rain.appendChild(el);
+}
+
+// FILTERS
+const btns=document.querySelectorAll('.filter-btn');
+const cards=document.querySelectorAll('.proj-card');
+btns.forEach(btn=>{
+    btn.addEventListener('click',()=>{
+        btns.forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        const f=btn.dataset.filter;
+        cards.forEach(c=>{
+            const cats=c.dataset.cats||'';
+            if(f==='all'||cats.includes(f)){
+                c.style.display='flex';
+                setTimeout(()=>c.style.opacity='1',10);
+            } else {
+                c.style.opacity='0';
+                setTimeout(()=>c.style.display='none',300);
+            }
+        });
+    });
+});
+</script>
 </body>
 </html>

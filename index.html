@@ -7,344 +7,577 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
         integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="estilo.css">
-    <title>Desiderio Raul Nuñez Guzman</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <title>Desiderio Raul Nuñez Guzman — Analista de Operaciones Comerciales</title>
+    <style>
+        :root {
+            --accent: #c8f53a;
+            --accent2: #940253;
+            --dark: #07070f;
+            --dark2: #0d0d1a;
+            --card: #111120;
+            --card2: #16162a;
+            --text: #eaeaf5;
+            --muted: #6e6e90;
+            --border: rgba(200,245,58,0.12);
+            --border2: rgba(200,245,58,0.25);
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior:smooth; }
+        body { font-family:'Inter',sans-serif; background:var(--dark); color:var(--text); overflow-x:hidden; }
+
+        /* CANVAS */
+        #stars-canvas { position:fixed; inset:0; width:100%; height:100%; z-index:0; pointer-events:none; }
+        .code-rain { position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+        .code-line {
+            position:absolute; bottom:0; font-family:'Space Mono',monospace; font-size:10px;
+            color:rgba(200,245,58,0.18); white-space:nowrap; animation:rain linear infinite;
+            border-left:1px solid rgba(200,245,58,0.08); padding:0 8px 6px;
+            background:linear-gradient(transparent, rgba(8,8,16,0.4));
+        }
+        @keyframes rain { from{transform:translateY(100vh)} to{transform:translateY(-110vh)} }
+
+        /* NAV */
+        header {
+            position:fixed; top:0; width:100%; padding:16px 48px;
+            display:flex; justify-content:space-between; align-items:center;
+            z-index:100; background:rgba(7,7,15,0.88); backdrop-filter:blur(16px);
+            border-bottom:1px solid var(--border);
+        }
+        .logo { font-family:'Syne',sans-serif; font-weight:800; font-size:1.4rem; letter-spacing:-1px; color:var(--text); }
+        .logo span { color:var(--accent); }
+        nav { display:flex; gap:30px; align-items:center; }
+        nav a { color:var(--muted); text-decoration:none; font-size:12px; font-weight:500; letter-spacing:.08em; text-transform:uppercase; transition:color .2s; }
+        nav a:hover { color:var(--accent); }
+        .nav-cta {
+            padding:8px 20px; background:var(--accent); color:#000; font-weight:700;
+            font-size:11px; border-radius:6px; letter-spacing:.06em; text-transform:uppercase;
+            transition:transform .2s, box-shadow .2s;
+        }
+        .nav-cta:hover { color:#000 !important; transform:translateY(-1px); box-shadow:0 6px 20px rgba(200,245,58,.3); }
+
+        /* HERO */
+        .hero { position:relative; min-height:100vh; display:flex; align-items:center; justify-content:center; z-index:1; padding:100px 48px 60px; }
+        .hero-inner { max-width:1100px; width:100%; display:grid; grid-template-columns:1fr auto; gap:70px; align-items:center; }
+
+        .hero-badge {
+            display:inline-flex; align-items:center; gap:8px;
+            background:rgba(200,245,58,.07); border:1px solid var(--border2);
+            border-radius:999px; padding:5px 16px; font-size:11px; color:var(--accent);
+            letter-spacing:.1em; text-transform:uppercase; margin-bottom:22px; font-family:'Space Mono',monospace;
+        }
+        .hero-badge-dot { width:7px; height:7px; background:var(--accent); border-radius:50%; animation:blink 2s infinite; }
+        @keyframes blink { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.3;transform:scale(.7)} }
+
+        .hero h1 { font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(2.4rem,5vw,4.2rem); line-height:1.02; letter-spacing:-2px; margin-bottom:14px; }
+        .hero h1 .hl { color:var(--accent); display:block; }
+        .hero-role { font-size:15px; color:var(--muted); margin-bottom:8px; font-weight:300; }
+        .hero-role strong { color:var(--text); font-weight:600; }
+        .hero-company { font-size:13px; color:var(--accent2); margin-bottom:28px; font-family:'Space Mono',monospace; }
+        .hero-desc { font-size:14.5px; color:var(--muted); line-height:1.75; max-width:540px; margin-bottom:36px; }
+
+        .hero-actions { display:flex; gap:12px; flex-wrap:wrap; }
+        .btn-p {
+            padding:12px 28px; background:var(--accent); color:#000; font-weight:700; font-size:12px;
+            border:none; border-radius:7px; cursor:pointer; text-decoration:none; letter-spacing:.06em;
+            text-transform:uppercase; transition:transform .2s, box-shadow .2s;
+        }
+        .btn-p:hover { transform:translateY(-2px); box-shadow:0 10px 30px rgba(200,245,58,.3); }
+        .btn-o {
+            padding:12px 28px; background:transparent; color:var(--text); font-weight:600; font-size:12px;
+            border:1px solid rgba(255,255,255,.15); border-radius:7px; cursor:pointer; text-decoration:none;
+            letter-spacing:.06em; text-transform:uppercase; transition:border-color .2s, color .2s;
+        }
+        .btn-o:hover { border-color:var(--accent); color:var(--accent); }
+
+        .hero-socials { display:flex; gap:12px; margin-top:30px; }
+        .hero-socials a {
+            width:38px; height:38px; display:flex; align-items:center; justify-content:center;
+            border:1px solid rgba(255,255,255,.1); border-radius:8px; color:var(--muted); font-size:14px;
+            transition:border-color .2s, color .2s, background .2s;
+        }
+        .hero-socials a:hover { border-color:var(--accent); color:var(--accent); background:rgba(200,245,58,.07); }
+
+        .hero-photo-wrap { position:relative; flex-shrink:0; }
+        .hero-photo-wrap::before {
+            content:''; position:absolute; inset:-3px; border-radius:22px;
+            background:linear-gradient(135deg, var(--accent), var(--accent2)); z-index:-1;
+        }
+        .hero-photo-wrap img { width:230px; height:275px; object-fit:cover; border-radius:20px; display:block; }
+
+        /* STATS */
+        .stats-bar { position:relative; z-index:1; background:var(--card); border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:26px 48px; }
+        .stats-inner { max-width:1100px; margin:auto; display:grid; grid-template-columns:repeat(5,1fr); }
+        .stat { text-align:center; padding:0 16px; border-right:1px solid var(--border); }
+        .stat:last-child { border-right:none; }
+        .stat-num { font-family:'Syne',sans-serif; font-size:1.9rem; font-weight:800; color:var(--accent); }
+        .stat-label { font-size:11px; color:var(--muted); letter-spacing:.05em; text-transform:uppercase; margin-top:4px; font-family:'Space Mono',monospace; }
+
+        /* SECTIONS */
+        section { position:relative; z-index:1; padding:88px 48px; }
+        .section-inner { max-width:1100px; margin:auto; }
+        .section-label { font-family:'Space Mono',monospace; font-size:10px; color:var(--accent); letter-spacing:.18em; text-transform:uppercase; margin-bottom:10px; }
+        .section-title { font-family:'Syne',sans-serif; font-size:clamp(1.8rem,3vw,2.6rem); font-weight:800; letter-spacing:-1.5px; margin-bottom:48px; }
+
+        /* SOBRE MÍ */
+        .sobre-grid { display:grid; grid-template-columns:1.5fr 1fr; gap:52px; align-items:start; }
+        .sobre-text p { color:var(--muted); line-height:1.82; font-size:14.5px; margin-bottom:18px; }
+        .sobre-text p strong { color:var(--text); }
+        .sobre-cards { display:flex; flex-direction:column; gap:12px; }
+        .info-card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:18px 20px; }
+        .info-card-title { font-size:10px; color:var(--accent); letter-spacing:.12em; text-transform:uppercase; font-family:'Space Mono',monospace; margin-bottom:10px; }
+        .info-card p, .info-card li { font-size:13px; color:var(--muted); line-height:1.65; }
+        .info-card ul { list-style:none; }
+        .info-card ul li::before { content:'→ '; color:var(--accent); }
+
+        /* SKILLS */
+        .skills-section { background:var(--dark2); }
+        .skills-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(310px,1fr)); gap:14px; }
+        .skill-item { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:16px 20px; transition:border-color .3s; }
+        .skill-item:hover { border-color:var(--border2); }
+        .skill-top { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
+        .skill-name { font-size:13px; font-weight:500; color:var(--text); }
+        .skill-pct { font-family:'Space Mono',monospace; font-size:11px; color:var(--accent); }
+        .skill-bar { height:2px; background:rgba(255,255,255,.05); border-radius:999px; overflow:hidden; }
+        .skill-fill { height:100%; background:linear-gradient(90deg,var(--accent2),var(--accent)); border-radius:999px; width:0; transition:width 1.3s cubic-bezier(.4,0,.2,1); }
+        .skill-tags { display:flex; flex-wrap:wrap; gap:5px; margin-top:10px; }
+        .tag { padding:2px 9px; background:rgba(200,245,58,.05); border:1px solid var(--border); border-radius:999px; font-size:10px; color:var(--muted); }
+
+        /* EXPERIENCE */
+        .exp-list { display:flex; flex-direction:column; gap:20px; }
+        .exp-card {
+            background:var(--card); border:1px solid var(--border); border-radius:14px; padding:28px 30px;
+            position:relative; overflow:hidden; transition:border-color .3s;
+        }
+        .exp-card:hover { border-color:var(--border2); }
+        .exp-card::before { content:''; position:absolute; left:0; top:0; bottom:0; width:3px; background:linear-gradient(180deg,var(--accent),var(--accent2)); }
+        .exp-card.current::after {
+            content:'ACTUAL'; position:absolute; top:20px; right:20px;
+            padding:3px 10px; background:rgba(200,245,58,.1); border:1px solid var(--border2);
+            border-radius:999px; font-size:9px; color:var(--accent); font-family:'Space Mono',monospace; letter-spacing:.1em;
+        }
+        .exp-header { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:6px; flex-wrap:wrap; gap:8px; }
+        .exp-title { font-family:'Syne',sans-serif; font-size:1.08rem; font-weight:700; color:var(--text); }
+        .exp-period { font-family:'Space Mono',monospace; font-size:10px; color:var(--accent); background:rgba(200,245,58,.07); padding:4px 10px; border-radius:999px; }
+        .exp-company { font-size:13px; color:var(--muted); margin-bottom:18px; }
+        .exp-company strong { color:var(--accent2); }
+        .exp-items { list-style:none; display:flex; flex-direction:column; gap:7px; }
+        .exp-items li { font-size:13.5px; color:var(--muted); padding-left:16px; position:relative; line-height:1.65; }
+        .exp-items li::before { content:'▸'; position:absolute; left:0; color:var(--accent); font-size:10px; top:3px; }
+        .exp-items li strong { color:var(--text); }
+
+        /* PROJECTS */
+        .projects-section { background:var(--dark2); }
+        .projects-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:18px; }
+        .proj-card {
+            background:var(--card); border:1px solid var(--border); border-radius:14px; padding:24px;
+            transition:transform .3s, border-color .3s; display:flex; flex-direction:column; gap:12px;
+        }
+        .proj-card:hover { transform:translateY(-4px); border-color:var(--border2); }
+        .proj-year { font-family:'Space Mono',monospace; font-size:10px; color:var(--accent); letter-spacing:.1em; }
+        .proj-name { font-family:'Syne',sans-serif; font-size:1.05rem; font-weight:700; color:var(--text); }
+        .proj-desc { font-size:13px; color:var(--muted); line-height:1.65; flex:1; }
+        .proj-stack { display:flex; flex-wrap:wrap; gap:5px; }
+        .proj-tag { padding:3px 9px; background:rgba(148,2,83,.12); border:1px solid rgba(148,2,83,.25); border-radius:999px; font-size:10px; color:#d080b0; }
+        .proj-link { display:inline-flex; align-items:center; gap:6px; font-size:12px; color:var(--accent); text-decoration:none; font-weight:600; transition:gap .2s; }
+        .proj-link:hover { gap:10px; }
+
+        /* EDUCATION */
+        .edu-card { background:var(--card); border:1px solid var(--border); border-radius:14px; padding:26px 28px; display:flex; gap:20px; align-items:flex-start; margin-bottom:14px; transition:border-color .3s; }
+        .edu-card:hover { border-color:var(--border2); }
+        .edu-icon { width:46px; height:46px; border-radius:11px; background:rgba(200,245,58,.07); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; font-size:20px; flex-shrink:0; }
+        .edu-title { font-family:'Syne',sans-serif; font-size:1rem; font-weight:700; color:var(--text); margin-bottom:4px; }
+        .edu-inst { font-size:13px; color:var(--accent); margin-bottom:4px; }
+        .edu-period { font-size:11px; color:var(--muted); font-family:'Space Mono',monospace; }
+        .edu-badges { display:flex; gap:8px; flex-wrap:wrap; margin-top:8px; }
+        .edu-badge { padding:3px 10px; background:rgba(200,245,58,.08); border:1px solid var(--border); border-radius:999px; font-size:11px; color:var(--accent); }
+        .edu-badge.pink { background:rgba(148,2,83,.12); border-color:rgba(148,2,83,.25); color:#d080b0; }
+
+        /* COURSES */
+        .courses-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:12px; }
+        .course-card { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:15px 17px; display:flex; align-items:flex-start; gap:12px; transition:border-color .3s; }
+        .course-card:hover { border-color:var(--border2); }
+        .course-icon { width:34px; height:34px; border-radius:8px; background:rgba(148,2,83,.12); display:flex; align-items:center; justify-content:center; font-size:15px; flex-shrink:0; }
+        .course-name { font-size:13px; font-weight:500; color:var(--text); line-height:1.4; }
+        .course-src { font-size:11px; color:var(--muted); margin-top:3px; font-family:'Space Mono',monospace; }
+
+        /* CONTACT */
+        .contact-section { background:var(--dark2); }
+        .contact-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:14px; }
+        .contact-card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:22px; text-align:center; transition:border-color .3s, transform .3s; }
+        .contact-card:hover { border-color:var(--border2); transform:translateY(-3px); }
+        .contact-icon { font-size:22px; color:var(--accent); margin-bottom:10px; }
+        .contact-label { font-size:10px; color:var(--muted); letter-spacing:.1em; text-transform:uppercase; font-family:'Space Mono',monospace; margin-bottom:6px; }
+        .contact-value { font-size:13px; color:var(--text); font-weight:500; word-break:break-all; }
+
+        footer { position:relative; z-index:1; text-align:center; padding:28px 48px; border-top:1px solid var(--border); font-size:11px; color:var(--muted); font-family:'Space Mono',monospace; }
+        footer span { color:var(--accent); }
+
+        /* DIVIDER */
+        .section-dark { background:var(--dark2); }
+
+        @media (max-width:900px) {
+            header { padding:14px 20px; }
+            nav { gap:16px; }
+            section { padding:60px 20px; }
+            .hero { padding:90px 20px 50px; }
+            .hero-inner { grid-template-columns:1fr; gap:0; }
+            .hero-photo-wrap { display:none; }
+            .stats-inner { grid-template-columns:repeat(3,1fr); }
+            .stat:nth-child(3) { border-right:none; }
+            .sobre-grid { grid-template-columns:1fr; }
+            .stats-bar { padding:20px; }
+        }
+    </style>
 </head>
 <body>
-    <!-- Animación de Fondo 3D Mejorada -->
-    <div class="d-background">
-        <canvas id="stars-canvas"></canvas> <!-- Canvas para las estrellas -->
-        <div class="computer left">
-           <!-- <img src="../img/laptop.jpg" alt="Laptop izquierda" class="laptop-img"> -->
+
+<canvas id="stars-canvas"></canvas>
+<div class="code-rain" id="codeRain"></div>
+
+<!-- NAV -->
+<header>
+    <div class="logo">D<span>Raul</span></div>
+    <nav>
+        <a href="#sobre">Sobre mí</a>
+        <a href="#skills">Skills</a>
+        <a href="#experiencia">Experiencia</a>
+        <a href="#proyectos">Proyectos</a>
+        <a href="proyectos.html">Portfolio</a>
+        <a href="#contacto" class="nav-cta">Contáctame</a>
+    </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+    <div class="hero-inner">
+        <div>
+            <div class="hero-badge"><div class="hero-badge-dot"></div>Disponible para proyectos freelance</div>
+            <h1>Desiderio Raul<span class="hl">Nuñez Guzman</span></h1>
+            <p class="hero-role"><strong>Analista de Operaciones Comerciales</strong></p>
+            <p class="hero-company">América Móvil S.A.C. (Claro Perú) · desde Feb 2025</p>
+            <p class="hero-desc">Ingeniero de Sistemas de Información — UPC Tercio Superior · PRONABEC. Especializado en automatización de procesos, análisis de datos con Python y Power Automate, APIs REST y dashboards para toma de decisiones empresariales en telecomunicaciones.</p>
+            <div class="hero-actions">
+                <a href="#contacto" class="btn-p">Contáctame</a>
+                <a href="proyectos.html" class="btn-o">Ver proyectos</a>
+                <a href="https://drive.google.com/drive/folders/1-iPiruSDLWyERTfGg8U41POjlROpekSY?usp=sharing" target="_blank" class="btn-o">Certificados</a>
+            </div>
+            <div class="hero-socials">
+                <a href="https://www.linkedin.com/in/desiderio-raul-nu%C3%B1ez-guzman-9563b820b/" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="https://github.com/Raulzk" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                <a href="https://www.youtube.com/channel/UCHbVguLMLJKVLL2A0Nu1MwQ" target="_blank" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                <a href="https://www.facebook.com/profile.php?id=100080225571523" target="_blank" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            </div>
         </div>
-        <div class="computer center">
-          <!--  <img src="../img/laptop.jpg" alt="Laptop centro" class="laptop-img">-->
+        <div class="hero-photo-wrap">
+            <img src="img/miFoto.jpg" alt="Foto de Raul Nuñez Guzman">
         </div>
-        <div class="computer right">
-           <!-- <img src="../img/laptop.jpg" alt="Laptop derecha" class="laptop-img"> -->
-        </div>
-        <div class="code-snippets">
-            <div class="code-snippet">
-                <p>import pandas as pd</p>
-                <p>df = pd.DataFrame({'data': [1, 2, 3]})</p>
-                <p>print(df.mean())</p>
+    </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+    <div class="stats-inner">
+        <div class="stat"><div class="stat-num">3,000+</div><div class="stat-label">PDFs procesados con IA</div></div>
+        <div class="stat"><div class="stat-num">99%</div><div class="stat-label">Resolución de incidencias</div></div>
+        <div class="stat"><div class="stat-num">8+</div><div class="stat-label">Proyectos desplegados</div></div>
+        <div class="stat"><div class="stat-num">2+</div><div class="stat-label">Años experiencia laboral</div></div>
+        <div class="stat"><div class="stat-num">Mar'25</div><div class="stat-label">Inicio titulación UPC</div></div>
+    </div>
+</div>
+
+<!-- SOBRE MÍ -->
+<section id="sobre">
+    <div class="section-inner">
+        <p class="section-label">// 01 — Sobre mí</p>
+        <h2 class="section-title">¿Quién soy?</h2>
+        <div class="sobre-grid">
+            <div class="sobre-text">
+                <p>Soy Raul, Ingeniero de Sistemas de Información egresado de la <strong>Universidad Peruana de Ciencias Aplicadas (UPC) — Tercio Superior</strong>, becado por <strong>PRONABEC</strong>. Cuento con mi <strong>Bachiller</strong> y en marzo 2025 inicio el <strong>programa de titulación</strong>.</p>
+                <p>Actualmente soy <strong>Analista de Operaciones Comerciales en América Móvil (Claro Perú)</strong> desde el 16 de febrero de 2025, donde automatizo procesos con <strong>Python y Power Automate</strong>, optimizo flujos de datos y construyo soluciones que impactan la operación comercial de una de las telcos más grandes de Latinoamérica.</p>
+                <p>Me apasiona resolver problemas reales con tecnología: desde scripts que procesan miles de documentos hasta dashboards que guían decisiones estratégicas. Me defino por mi orientación a resultados, capacidad de aprendizaje rápido y actitud proactiva.</p>
             </div>
-            <div class="code-snippet">
-                <p>from sklearn.model_selection import train_test_split</p>
-                <p>X_train, X_test = train_test_split(data, test_size=0.2)</p>
-                <p>model.fit(X_train, y_train)</p>
-            </div>
-            <div class="code-snippet">
-                <p>import requests</p>
-                <p>response = requests.get('https://api.example.com')</p>
-                <p>print(response.json())</p>
-            </div>
-            <div class="code-snippet">
-                <p>def automate_task():</p>
-                <p>    # Código de automatización</p>
-                <p>    return 'Hecho'</p>
-            </div>
-            <div class="code-snippet">
-                <p>import numpy as np</p>
-                <p>array = np.array([1, 2, 3])</p>
-                <p>print(np.sum(array))</p>
-            </div>
-            <div class="code-snippet">
-                <p>import torch</p>
-                <p>tensor = torch.tensor([1, 2, 3])</p>
-                <p>print(tensor.sum())</p>
-            </div>
-            <div class="code-snippet">
-                <p>from sympy import symbols, solve</p>
-                <p>x = symbols('x')</p>
-                <p>solve(x**2 - 1, x)</p>
-            </div>
-            <div class="code-snippet">
-                <p>import matplotlib.pyplot as plt</p>
-                <p>plt.plot([1,2,3], [4,5,6])</p>
-                <p>plt.show()</p>
+            <div class="sobre-cards">
+                <div class="info-card">
+                    <div class="info-card-title">Datos personales</div>
+                    <ul>
+                        <li>Villa El Salvador, Lima, Perú</li>
+                        <li>Nacido el 03/11/2000</li>
+                        <li>Inglés Intermedio (Cambridge · UPC)</li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <div class="info-card-title">Habilidades blandas</div>
+                    <ul>
+                        <li>Liderazgo y trabajo en equipo</li>
+                        <li>Comunicación efectiva</li>
+                        <li>Proactividad y orientación a resultados</li>
+                        <li>Organización y gestión del tiempo</li>
+                        <li>Aprendizaje continuo</li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <div class="info-card-title">Idiomas</div>
+                    <p>🇵🇪 Español — Nativo<br>🇬🇧 Inglés — Intermedio (Cambridge · UPC 2021–2025)</p>
+                </div>
             </div>
         </div>
     </div>
+</section>
 
-    <!-- SECCIÓN INICIO -->
-    <section class="inicio" id="inicio" aria-labelledby="inicio-titulo">
-        <div class="contenido-seccion">
-            <header>
-                <div class="logo">
-                    D<span class="color">Raul</span>
+<!-- HABILIDADES -->
+<section id="skills" class="skills-section">
+    <div class="section-inner">
+        <p class="section-label">// 02 — Habilidades técnicas</p>
+        <h2 class="section-title">Stack tecnológico</h2>
+        <div class="skills-grid" id="skills-grid"></div>
+    </div>
+</section>
+
+<!-- EXPERIENCIA -->
+<section id="experiencia">
+    <div class="section-inner">
+        <p class="section-label">// 03 — Experiencia laboral</p>
+        <h2 class="section-title">Trayectoria profesional</h2>
+        <div class="exp-list">
+
+            <!-- ACTUAL -->
+            <div class="exp-card current">
+                <div class="exp-header">
+                    <div class="exp-title">Analista de Operaciones Comerciales</div>
+                    <div class="exp-period">16 Feb 2025 — Presente</div>
                 </div>
-                <nav id="nav" class="nav">
-                    <a href="#inicio">Inicio</a>
-                    <a href="#sobremi">Sobre mí</a>
-                    <a href="#habilidades">Habilidades</a>
-                    <a href="#resumen">Resumen</a>
-                    <a href="#contacto">Contacto</a>
-                    <a href="proyectos.html">Proyectos</a>
-                </nav>
-            </header>
-            <div class="info">
-                <h1>Desiderio Raul Nuñez Guzman</h1>
-                <h2>Egresado de Ingeniería de Sistemas de Información</h2>
-                <div class="redes">
-                    <a href="https://www.facebook.com/profile.php?id=100080225571523" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-                    <a href="https://github.com/Raulzk" aria-label="GitHub"><i class="fa-brands fa-square-github"></i></a>
-                    <a href="https://www.youtube.com/channel/UCHbVguLMLJKVLL2A0Nu1MwQ" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
-                    <a href="https://www.linkedin.com/in/desiderio-raul-nu%C3%B1ez-guzman-9563b820b/" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                <div class="exp-company"><strong>América Móvil S.A.C. (Claro Perú)</strong> · Lima, Perú</div>
+                <ul class="exp-items">
+                    <li>Automatización de procesos comerciales con <strong>Python y Power Automate</strong>, optimizando flujos operativos y reduciendo tiempos de ejecución.</li>
+                    <li>Análisis y procesamiento de datos para soporte a la operación comercial de Claro Perú.</li>
+                    <li>Coordinación con equipos de desarrollo y operaciones para la implementación de mejoras continuas.</li>
+                </ul>
+            </div>
+
+            <!-- PRACTICANTE -->
+            <div class="exp-card">
+                <div class="exp-header">
+                    <div class="exp-title">Practicante de Operación CRM</div>
+                    <div class="exp-period">Jun 2024 — 13 Feb 2025</div>
                 </div>
+                <div class="exp-company"><strong>América Móvil S.A.C. (Claro Perú)</strong> · Lima, Perú</div>
+                <ul class="exp-items">
+                    <li>Desarrollé una <strong>API en Python</strong> para análisis automático de contratos y detección de firmas digitales en más de <strong>3,000 documentos PDF</strong> usando OpenCV y Poppler.</li>
+                    <li>Automaticé flujos operativos con <strong>Python, Shell scripting y Apache NiFi</strong>, optimizando pipelines de datos.</li>
+                    <li>Diseñé <strong>dashboards en Power BI</strong> y un dashboard web con <strong>Flask + HTML</strong> desplegado en servidores Linux.</li>
+                    <li>Optimicé bases de datos <strong>Oracle</strong> mediante paquetes, procedimientos almacenados y reportes de alto rendimiento.</li>
+                    <li>Administré y monitoreé servidores Linux/Windows con <strong>Dynatrace, Zabbix y Elastic</strong>.</li>
+                    <li>Gestioné incidencias en plataformas de ventas y postventa con <strong>99% de tasa de resolución</strong>.</li>
+                    <li>Operé con herramientas enterprise: <strong>Bitbucket, Jira, Control-M, Remedy y RTC</strong>.</li>
+                </ul>
             </div>
-            <div class="foto">
-                <img src="img/miFoto.jpg" alt="Foto de Desiderio Raul Nuñez Guzman">
+
+            <!-- DATA SERVICES -->
+            <div class="exp-card">
+                <div class="exp-header">
+                    <div class="exp-title">Desarrollador Web</div>
+                    <div class="exp-period">Dic 2023 — Mar 2024</div>
+                </div>
+                <div class="exp-company"><strong>Data Services Perú</strong> · Lima, Perú</div>
+                <ul class="exp-items">
+                    <li>Desarrollo y mantenimiento de página web corporativa en <strong>PHP</strong>.</li>
+                    <li>Gestión de bases de datos con <strong>SQLite</strong> y administración del entorno con XAMPP.</li>
+                </ul>
             </div>
+
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- SECCIÓN SOBRE MÍ -->
-    <section class="sobremi" id="sobremi" aria-labelledby="sobremi-titulo">
-        <div class="contenido-seccion">
-            <h2 class="titulo-seccion" id="sobremi-titulo">Sobre Mí</h2>
-            <h3>Detalles Personales</h3>
-            <p class="especial">Egresado de Ingeniería de Sistemas de Información por la Universidad Peruana de Ciencias Aplicadas (UPC), perteneciente al Tercio Superior y beneficiario del Programa Nacional de Becas y Crédito Educativo (Pronabec). Reconocido por la excelencia académica y el compromiso con el desarrollo del país. Poseo experiencia en automatización de procesos y dominio de Python, así como sólidos conocimientos en programación, gestión de bases de datos y desarrollo de aplicaciones web y móviles. Me caracterizo por mi capacidad de aprendizaje continuo, adaptabilidad y orientación a resultados, aportando soluciones eficientes e innovadoras en entornos profesionales.</p>
-            <div class="fila">
-                <div class="col card-3d">
-                    <i class="fa-solid fa-user" aria-hidden="true"></i>
-                    <span class="titulo-detalle">Perfil</span>
-                    <p>Egresado de Ingeniería de Sistemas de Información por la UPC, perteneciente al tercio superior y beneficiario de PRONABEC.</p>
-                </div>
-                <div class="col card-3d">
-                    <i class="fa-solid fa-desktop" aria-hidden="true"></i>
-                    <span class="titulo-detalle">Habilidades Blandas</span>
-                    <ul>
-                        <li>Organización</li>
-                        <li>Comunicación Efectiva</li>
-                        <li>Atención al cliente</li>
-                        <li>Trabajo en grupo</li>
-                        <li>Proactivo</li>
-                        <li>Liderazgo</li>
-                    </ul>
-                </div>
-                <div class="col card-3d">
-                    <i class="fa-solid fa-flag" aria-hidden="true"></i>
-                    <span class="titulo-detalle">Datos Personales</span>
-                    <ul>
-                        <li>Fecha de Nacimiento: 03/11/2000</li>
-                        <li>Nacionalidad: Perú</li>
-                        <li>Residencia Actual: Villa el Salvador, Lima</li>
-                    </ul>
-                </div>
-                <div class="col card-3d">
-                    <i class="fa-solid fa-language" aria-hidden="true"></i>
-                    <span class="titulo-detalle">Idiomas</span>
-                    <p>
-                        <span>Español:</span> Nativo<br>
-                        <span>Inglés:</span> Nivel Intermedio (Universidad de Cambridge – IDIOMAS UPC, septiembre 2021 – 2025)
-                    </p>
+<!-- PROYECTOS -->
+<section id="proyectos" class="projects-section">
+    <div class="section-inner">
+        <p class="section-label">// 04 — Proyectos destacados</p>
+        <h2 class="section-title">Lo que he construido</h2>
+        <div class="projects-grid">
+
+            <div class="proj-card">
+                <div class="proj-year">2025 · Tesis</div>
+                <div class="proj-name">Plataforma de Análisis de Malware con ML</div>
+                <div class="proj-desc">Plataforma web para análisis de archivos ejecutables (.dll, .exe) con Machine Learning (Random Forest). Predice riesgos y emite alertas automáticas en tiempo real.</div>
+                <div class="proj-stack">
+                    <span class="proj-tag">Python</span><span class="proj-tag">Flask</span>
+                    <span class="proj-tag">PostgreSQL</span><span class="proj-tag">Random Forest</span><span class="proj-tag">scikit-learn</span>
                 </div>
             </div>
-            <h3>Cursos Especializados</h3>
-            <ul>
-                <li>Python: Udemy, 2025.</li>
-                <li>𝐆𝐞𝐬𝐭𝐢𝐨́𝐧 𝐝𝐞 𝐒𝐞𝐠𝐮𝐫𝐢𝐝𝐚𝐝 𝐝𝐞 𝐥𝐚 𝐈𝐧𝐟𝐨𝐫𝐦𝐚𝐜𝐢𝐨́𝐧: UPC, 2025</li>
-                <li>Fundamentos de Terminal y Línea de comandos en Linux: Udemy, 2024</li>
-                <li>Machine Learning on Google Cloud: Google Cloud, 2023</li>
-                <li>SQL para ciencia de datos: Universidad de California, 2022.</li>
-            </ul>
-            <div class="container">
-                <div class="row">
-                    <div class="col">
-                        <button class="cert-btn"><a href="https://drive.google.com/drive/folders/1-iPiruSDLWyERTfGg8U41POjlROpekSY?usp=sharing" aria-label="Ver Certificados">Certificados</a></button>
-                    </div>
+
+            <div class="proj-card">
+                <div class="proj-year">Claro Perú · 2024</div>
+                <div class="proj-name">API de Detección de Firmas en PDFs</div>
+                <div class="proj-desc">API en Python para análisis automático de contratos y detección de firmas digitales en más de 3,000 documentos PDF usando visión computacional.</div>
+                <div class="proj-stack">
+                    <span class="proj-tag">Python</span><span class="proj-tag">OpenCV</span>
+                    <span class="proj-tag">Poppler</span><span class="proj-tag">REST API</span>
                 </div>
             </div>
+
+            <div class="proj-card">
+                <div class="proj-year">2024</div>
+                <div class="proj-name">QueTrabajo — Plataforma de empleos</div>
+                <div class="proj-desc">Plataforma que conecta trabajadores independientes con clientes. Desplegada en producción con documentación API completa.</div>
+                <div class="proj-stack">
+                    <span class="proj-tag">Angular</span><span class="proj-tag">Spring Boot</span>
+                    <span class="proj-tag">PostgreSQL</span><span class="proj-tag">Swagger</span>
+                </div>
+                <a href="https://que-trabajo-web.web.app/landing-page" target="_blank" class="proj-link">Ver proyecto →</a>
+            </div>
+
+            <div class="proj-card">
+                <div class="proj-year">En curso</div>
+                <div class="proj-name">TuckTuck — App tipo TikTok</div>
+                <div class="proj-desc">Aplicación web de video social con sistema de feed, autenticación de usuarios y subida de contenido multimedia.</div>
+                <div class="proj-stack">
+                    <span class="proj-tag">React.js</span><span class="proj-tag">Node.js</span>
+                    <span class="proj-tag">Express.js</span><span class="proj-tag">MongoDB</span>
+                </div>
+            </div>
+
+            <div class="proj-card">
+                <div class="proj-year">2023</div>
+                <div class="proj-name">Selva Center — ERP SAP S/4HANA</div>
+                <div class="proj-desc">Implementación y configuración de módulos clave del ERP SAP S/4HANA para optimización de procesos empresariales.</div>
+                <div class="proj-stack">
+                    <span class="proj-tag">SAP S/4HANA</span><span class="proj-tag">ERP</span><span class="proj-tag">Business Processes</span>
+                </div>
+            </div>
+
+            <div class="proj-card">
+                <div class="proj-year">2022</div>
+                <div class="proj-name">The Sea Reality — Videojuego educativo</div>
+                <div class="proj-desc">Videojuego 2D educativo sobre el cuidado del medio ambiente con mecánicas interactivas y base de datos integrada.</div>
+                <div class="proj-stack">
+                    <span class="proj-tag">C#</span><span class="proj-tag">Unity</span><span class="proj-tag">SQL Server</span>
+                </div>
+            </div>
+
         </div>
-    </section>
+        <div style="margin-top:28px; text-align:center;">
+            <a href="proyectos.html" class="btn-o" style="display:inline-block;">Ver todos los proyectos →</a>
+        </div>
+    </div>
+</section>
 
-    <!-- SECCIÓN HABILIDADES -->
-    <section class="habilidades" id="habilidades" aria-labelledby="habilidades-titulo">
-        <div class="contenido-seccion">
-            <h2 class="titulo-seccion" id="habilidades-titulo">Mis Habilidades Técnicas</h2>
-            <div class="fila">
-                <div class="col skill-card">
-                    <span>Python / Pandas</span>
-                    <div class="cont-barra">
-                        <div class="barra" id="python"></div>
-                        <span>90%</span>
-                    </div>
-                </div>
-                <div class="col skill-card">
-                    <span>C++ / C#</span>
-                    <div class="cont-barra">
-                        <div class="barra" id="cpp"></div>
-                        <span>80%</span>
-                    </div>
-                </div>
-            </div>
-            <div class="fila">
-                <div class="col skill-card">
-                    <span>Java / JavaScript / TypeScript</span>
-                    <div class="cont-barra">
-                        <div class="barra" id="java"></div>
-                        <span>80%</span>
-                    </div>
-                </div>
-                <div class="col skill-card">
-                    <span>PHP / HTML / CSS / SQL</span>
-                    <div class="cont-barra">
-                        <div class="barra" id="php"></div>
-                        <span>70%</span>
-                    </div>
-                </div>
-            </div>
-            <div class="fila">
-                <div class="col skill-card">
-                    <span>PostgreSQL / SQL Server / Oracle / MongoDB / SQLite</span>
-                    <div class="cont-barra">
-                        <div class="barra" id="databases"></div>
-                        <span>85%</span>
-                    </div>
-                </div>
-                <div class="col skill-card">
-                    <span>Angular / React.js / React Native / Vue.js / Node.js / Express.js / .NET / Spring Boot</span>
-                    <div class="cont-barra">
-                        <div class="barra" id="frameworks"></div>
-                        <span>75%</span>
-                    </div>
-                </div>
-            </div>
-            <div class="fila">
-                <div class="col skill-card">
-                    <span>AWS / Azure / Google Cloud / VirtualBox / Google Colab</span>
-                    <div class="cont-barra">
-                        <div class="barra" id="cloud"></div>
-                        <span>70%</span>
-                    </div>
-                </div>
-                <div class="col skill-card">
-                    <span>Power BI / Power Automate / Google Analytics / Google Apps Script / Apache NiFi</span>
-                    <div class="cont-barra">
-                        <div class="barra" id="analytics"></div>
-                        <span>80%</span>
-                    </div>
-                </div>
-            </div>
-            <div class="fila">
-                <div class="col skill-card">
-                    <span>Dynatrace / Elastic / Zabbix</span>
-                    <div class="cont-barra">
-                        <div class="barra" id="monitoring"></div>
-                        <span>65%</span>
-                    </div>
-                </div>
-                <div class="col skill-card">
-                    <span>SAP S/4HANA</span>
-                    <div class="cont-barra">
-                        <div class="barra" id="erp"></div>
-                        <span>70%</span>
-                    </div>
-                </div>
-            </div>
-            <div class="fila">
-                <div class="col skill-card">
-                    <span>Jira / Trello / Rational Team Concert (RTC)</span>
-                    <div class="cont-barra">
-                        <div class="barra" id="management"></div>
-                        <span>75%</span>
-                    </div>
-                </div>
-                <div class="col skill-card">
-                    <span>Git / GitHub / Visual Studio / VS Code / XAMPP</span>
-                    <div class="cont-barra">
-                        <div class="barra" id="tools"></div>
-                        <span>85%</span>
-                    </div>
-                </div>
-            </div>
-            <div class="fila">
-                <div class="col skill-card">
-                    <span>Bash/Shell</span>
-                    <div class="cont-barra">
-                        <div class="barra" id="shell"></div>
-                        <span>60%</span>
-                    </div>
+<!-- EDUCACIÓN -->
+<section id="educacion">
+    <div class="section-inner">
+        <p class="section-label">// 05 — Educación & Formación</p>
+        <h2 class="section-title">Preparación académica</h2>
+
+        <div class="edu-card">
+            <div class="edu-icon">🎓</div>
+            <div>
+                <div class="edu-title">Ingeniería de Sistemas de Información</div>
+                <div class="edu-inst">Universidad Peruana de Ciencias Aplicadas (UPC)</div>
+                <div class="edu-period">Agosto 2020 — Julio 2025</div>
+                <div class="edu-badges">
+                    <span class="edu-badge">Bachiller obtenido</span>
+                    <span class="edu-badge">Tercio Superior</span>
+                    <span class="edu-badge pink">Becado PRONABEC</span>
+                    <span class="edu-badge pink">Titulación: Mar 2025</span>
                 </div>
             </div>
         </div>
-    </section>
 
-    <!-- SECCIÓN RESUMEN -->
-    <section class="resumen" id="resumen" aria-labelledby="resumen-titulo">
-        <div class="contenido-seccion">
-            <h2 class="titulo-seccion" id="resumen-titulo">Resumen</h2>
-            <h3>Mi Preparación y Experiencia</h3>
-            <div class="timeline">
-                <div class="timeline-item left">
-                    <div class="timeline-content">
-                        <h4>Educación</h4>
-                        <p>Universidad Peruana de Ciencias Aplicadas (UPC)</p>
-                        <h5>Ingeniería de Sistemas de Información - Agosto 2020 – Julio 2025</h5>
-                        <p>Perteneciente al tercio superior y beneficiario de PRONABEC.</p>
-                    </div>
-                </div>
-                <div class="timeline-item right">
-                    <div class="timeline-content">
-                        <h4>Experiencia Laboral</h4>
-                        <p>Junio 2024 – Presente</p>
-                        <h5>Practicante de Operación CRM - América Móvil S.A.C. (Claro)</h5>
-                        <ul>
-                            <li>Extracción, limpieza y preprocesamiento de datos con Python.</li>
-                            <li>Automatización de procesos mediante scripts en Python.</li>
-                            <li>Diseño de dashboards en Power BI para la toma de decisiones.</li>
-                            <li>Optimización de bases de datos Oracle: paquetes, procedimientos y reportes.</li>
-                            <li>Monitoreo de servidores y alertas en Dynatrace.</li>
-                            <li>Administración de servidores Windows y Linux.</li>
-                            <li>Gestión de incidentes y requerimientos (99% de resolución).</li>
-                            <li>Documentación y mapeo de procesos de datos.</li>
-                            <li>Automatización de procesos mediante Apache NIFI.</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="timeline-item left">
-                    <div class="timeline-content">
-                        <h4>Experiencia Laboral</h4>
-                        <p>Diciembre 2023 – Marzo 2024</p>
-                        <h5>Desarrollador Web - Data Services Perú</h5>
-                        <ul>
-                            <li>Desarrollo y mantenimiento de la página web en PHP.</li>
-                            <li>Gestión de bases de datos con SQLite.</li>
-                            <li>Configuración y administración de entorno con XAMPP.</li>
-                        </ul>
-                    </div>
-                </div>
+        <div class="edu-card">
+            <div class="edu-icon">🇬🇧</div>
+            <div>
+                <div class="edu-title">Inglés — Nivel Intermedio</div>
+                <div class="edu-inst">Universidad de Cambridge · IDIOMAS UPC</div>
+                <div class="edu-period">Septiembre 2021 — 2025</div>
             </div>
         </div>
-    </section>
 
-    <!-- SECCIÓN CONTACTO -->
-    <section class="contacto" id="contacto" aria-labelledby="contacto-titulo">
-        <div class="contenido-seccion">
-            <h2 class="titulo-seccion" id="contacto-titulo">Contacto</h2>
-            <h3>¡Ponte en Contacto Ahora Mismo!</h3>
-            <div class="fila">
-                <div class="col contact-card">
-                    <h2><i class="fa-solid fa-phone" aria-hidden="true"></i> Teléfono</h2>
-                    <span class="info-contacto">984336652</span>
-                </div>
-                <div class="col contact-card">
-                    <h2><i class="fa-solid fa-envelope" aria-hidden="true"></i> Correo</h2>
-                    <span class="info-contacto">abcd2000raulnunez@gmail.com</span>
-                </div>
-                <div class="col contact-card">
-                    <h2><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> WhatsApp</h2>
-                    <span class="info-contacto">984336652</span>
-                </div>
-                <div class="col contact-card">
-                    <h2><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Ubicación</h2>
-                    <span class="info-contacto">Villa el Salvador, Lima, Perú</span>
-                </div>
-            </div>
+        <p class="section-label" style="margin:36px 0 18px;">// Cursos especializados</p>
+        <div class="courses-grid">
+            <div class="course-card"><div class="course-icon">🐍</div><div><div class="course-name">Python Avanzado</div><div class="course-src">Udemy · 2025</div></div></div>
+            <div class="course-card"><div class="course-icon">⚡</div><div><div class="course-name">Power Automate</div><div class="course-src">Microsoft · 2025</div></div></div>
+            <div class="course-card"><div class="course-icon">🔐</div><div><div class="course-name">Gestión de Seguridad de la Información</div><div class="course-src">UPC · 2025</div></div></div>
+            <div class="course-card"><div class="course-icon">🐧</div><div><div class="course-name">Terminal y Linux</div><div class="course-src">Udemy · 2024</div></div></div>
+            <div class="course-card"><div class="course-icon">☁️</div><div><div class="course-name">Machine Learning on Google Cloud</div><div class="course-src">Google Cloud · 2023</div></div></div>
+            <div class="course-card"><div class="course-icon">🗄️</div><div><div class="course-name">SQL para Ciencia de Datos</div><div class="course-src">Universidad de California · 2022</div></div></div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <script src="app.js"></script>
+<!-- CONTACTO -->
+<section id="contacto" class="contact-section">
+    <div class="section-inner">
+        <p class="section-label">// 06 — Contacto</p>
+        <h2 class="section-title">¿Hablamos?</h2>
+        <div class="contact-grid">
+            <div class="contact-card"><div class="contact-icon"><i class="fa-brands fa-whatsapp"></i></div><div class="contact-label">WhatsApp</div><div class="contact-value">984 336 652</div></div>
+            <div class="contact-card"><div class="contact-icon"><i class="fa-solid fa-envelope"></i></div><div class="contact-label">Correo</div><div class="contact-value">abcd2000raulnunez@gmail.com</div></div>
+            <div class="contact-card"><div class="contact-icon"><i class="fa-brands fa-linkedin-in"></i></div><div class="contact-label">LinkedIn</div><div class="contact-value">Desiderio Raul Nuñez</div></div>
+            <div class="contact-card"><div class="contact-icon"><i class="fa-brands fa-github"></i></div><div class="contact-label">GitHub</div><div class="contact-value">github.com/Raulzk</div></div>
+            <div class="contact-card"><div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div><div class="contact-label">Ubicación</div><div class="contact-value">Villa El Salvador, Lima</div></div>
+        </div>
+    </div>
+</section>
+
+<footer><p>Diseñado y desarrollado por <span>Desiderio Raul Nuñez Guzman</span> · Analista de Operaciones Comerciales · Lima, Perú · 2025</p></footer>
+
+<script>
+// STARS
+const canvas = document.getElementById('stars-canvas');
+const ctx = canvas.getContext('2d');
+function resize(){ canvas.width=window.innerWidth; canvas.height=window.innerHeight; }
+resize(); window.addEventListener('resize',resize);
+const stars = Array.from({length:150},()=>({ x:Math.random()*canvas.width, y:Math.random()*canvas.height, r:Math.random()*1.4+.2, s:Math.random()*.25+.04, o:Math.random()*.5+.3 }));
+function drawStars(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    stars.forEach(s=>{
+        ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+        ctx.fillStyle=`rgba(255,255,255,${s.o*(0.8+Math.random()*.2)})`; ctx.fill();
+        s.y-=s.s; if(s.y<0){s.y=canvas.height;s.x=Math.random()*canvas.width;}
+    }); requestAnimationFrame(drawStars);
+} drawStars();
+
+// CODE RAIN
+const rain = document.getElementById('codeRain');
+const lines = ['python','pandas','numpy','oracle','powerbi','flask','react','angular','nifi','dynatrace','automate','sql','api','docker','git'];
+for(let i=0;i<18;i++){
+    const el=document.createElement('div'); el.className='code-line';
+    el.textContent=lines[Math.floor(Math.random()*lines.length)];
+    el.style.left=`${Math.random()*100}%`;
+    el.style.animationDuration=`${8+Math.random()*10}s`;
+    el.style.animationDelay=`${Math.random()*8}s`;
+    rain.appendChild(el);
+}
+
+// SKILLS
+const skillsData = [
+    {name:'Python · Pandas · NumPy · OpenCV', pct:90, tags:['Automatización','APIs','ML','Data']},
+    {name:'Power Automate · Power BI', pct:82, tags:['RPA','Dashboards','KPIs','ETL']},
+    {name:'SQL · Oracle · PostgreSQL · MongoDB', pct:85, tags:['Stored Procs','Optimización','Reportes']},
+    {name:'Apache NiFi · Shell Scripting', pct:78, tags:['Pipelines','ETL','Flujos']},
+    {name:'React.js · Angular · Vue.js', pct:75, tags:['SPA','Frontend','Components']},
+    {name:'Node.js · Express · Spring Boot · PHP', pct:75, tags:['REST API','Backend','Microservices']},
+    {name:'JavaScript · TypeScript · Java · C#', pct:80, tags:['ES6+','OOP','Unity']},
+    {name:'AWS · Azure · Google Cloud', pct:70, tags:['Cloud','Deploy','Storage']},
+    {name:'Dynatrace · Zabbix · Elastic', pct:68, tags:['Monitoreo','Alertas','Logs']},
+    {name:'Git · GitHub · Bitbucket · Jira', pct:85, tags:['CI/CD','Versionado','Agile']},
+    {name:'SAP S/4HANA · Control-M · Remedy', pct:70, tags:['ERP','Enterprise','ITSM']},
+    {name:'Flask · HTML · CSS', pct:78, tags:['Web','Dashboards','Responsive']},
+];
+const grid=document.getElementById('skills-grid');
+skillsData.forEach(s=>{
+    grid.innerHTML+=`<div class="skill-item">
+        <div class="skill-top"><span class="skill-name">${s.name}</span><span class="skill-pct">${s.pct}%</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-pct="${s.pct}"></div></div>
+        <div class="skill-tags">${s.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+    </div>`;
+});
+
+const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{ if(e.isIntersecting) e.target.querySelectorAll('.skill-fill').forEach(f=>{f.style.width=f.dataset.pct+'%'}); });
+},{threshold:.15});
+obs.observe(document.getElementById('skills'));
+</script>
 </body>
 </html>
