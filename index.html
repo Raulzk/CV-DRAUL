@@ -62,19 +62,24 @@
 
         .hero-badge {
             display:inline-flex; align-items:center; gap:8px;
-            background:rgba(200,245,58,.07); border:1px solid var(--border2);
-            border-radius:999px; padding:5px 16px; font-size:11px; color:var(--accent);
-            letter-spacing:.1em; text-transform:uppercase; margin-bottom:22px; font-family:'Space Mono',monospace;
+            background:rgba(200,245,58,.06); border:1px solid var(--border2);
+            border-radius:999px; padding:6px 18px; font-size:10.5px; color:var(--accent);
+            letter-spacing:.12em; text-transform:uppercase; margin-bottom:24px;
+            font-family:'Space Mono',monospace; box-shadow:0 0 18px rgba(200,245,58,.06);
         }
-        .hero-badge-dot { width:7px; height:7px; background:var(--accent); border-radius:50%; animation:blink 2s infinite; }
+        .hero-badge-dot { width:6px; height:6px; background:var(--accent); border-radius:50%; animation:blink 2s infinite; box-shadow:0 0 6px var(--accent); }
         @keyframes blink { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.3;transform:scale(.7)} }
 
-        .hero h1 { font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(2.4rem,5vw,4.2rem); line-height:1.02; letter-spacing:-2px; margin-bottom:14px; }
-        .hero h1 .hl { color:var(--accent); display:block; }
-        .hero-role { font-size:15px; color:var(--muted); margin-bottom:8px; font-weight:300; }
-        .hero-role strong { color:var(--text); font-weight:600; }
-        .hero-company { font-size:13px; color:var(--accent2); margin-bottom:28px; font-family:'Space Mono',monospace; }
-        .hero-desc { font-size:14.5px; color:var(--muted); line-height:1.75; max-width:540px; margin-bottom:36px; }
+        .hero h1 { font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(2.6rem,5.2vw,4.4rem); line-height:1.0; letter-spacing:-2.5px; margin-bottom:18px; }
+        .hero h1 .hl { background:linear-gradient(90deg, var(--accent) 0%, #e8ff70 60%, var(--accent) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; display:block; }
+        .hero-tagline {
+            display:inline-flex; align-items:center; gap:10px; font-family:'Space Mono',monospace;
+            font-size:11px; color:var(--muted); letter-spacing:.12em; text-transform:uppercase;
+            margin-bottom:22px; padding-left:2px;
+        }
+        .hero-tagline::before { content:''; display:inline-block; width:28px; height:1px; background:var(--accent); opacity:.6; }
+        .hero-tagline span { color:var(--accent); }
+        .hero-desc { font-size:14.5px; color:var(--muted); line-height:1.8; max-width:540px; margin-bottom:32px; border-left:2px solid var(--border2); padding-left:16px; }
 
         .hero-actions { display:flex; gap:12px; flex-wrap:wrap; }
         .btn-p {
@@ -254,9 +259,8 @@
         <div>
             <div class="hero-badge"><div class="hero-badge-dot"></div>Disponible para proyectos freelance</div>
             <h1>Desiderio Raul<span class="hl">Nuñez Guzman</span></h1>
-            <p class="hero-role"><strong>Analista de Operaciones Comerciales</strong></p>
-            <p class="hero-company">América Móvil S.A.C. (Claro Perú) · desde Feb 2025</p>
-            <p class="hero-desc">Ingeniero de Sistemas de Información — UPC Tercio Superior · PRONABEC. Especializado en automatización de procesos, análisis de datos con Python y Power Automate, APIs REST y dashboards para toma de decisiones empresariales en telecomunicaciones.</p>
+            <p class="hero-tagline"><span>Full Stack Developer</span> </p>
+            <p class="hero-desc">Ingeniero de Sistemas de Información por la Universidad Peruana de Ciencias Aplicadas (UPC), perteneciente al Tercio Superior y beneficiario de PRONABEC, reconocido por su excelencia académica y compromiso con el desarrollo tecnológico del país.<br><br>Desarrollador full stack con dominio de Python, Next.js, Node.js, Flask, FastAPI, AWS (EC2, S3, RDS), MongoDB, Oracle y bases de datos SQL/NoSQL. Experiencia en plataformas de predicción energética, dashboards industriales (Flask, Oracle, Red Hat) y automatización de procesos con Python, Apache NiFi y Power Automate. Enfoque práctico, escalable y orientado a impulsar el crecimiento digital del Perú.</p>
             <div class="hero-actions">
                 <a href="#contacto" class="btn-p">Contáctame</a>
                 <a href="proyectos.html" class="btn-o">Ver proyectos</a>
@@ -480,6 +484,18 @@
                     <span class="edu-badge">Tercio Superior</span>
                     <span class="edu-badge pink">Becado PRONABEC</span>
                     <span class="edu-badge pink">Titulación: Mar 2025</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="edu-card">
+            <div class="edu-icon">📜</div>
+            <div>
+                <div class="edu-title">Programa de Titulación</div>
+                <div class="edu-inst">Universidad Peruana de Ciencias Aplicadas (UPC)</div>
+                <div class="edu-period">Marzo 2025 — en curso</div>
+                <div class="edu-badges">
+                    <span class="edu-badge pink">En curso</span>
                 </div>
             </div>
         </div>
